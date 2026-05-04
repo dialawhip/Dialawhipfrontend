@@ -8,10 +8,10 @@ const HIDE_FOR_MS = 24 * 60 * 60 * 1000;
 
 const PRIZES = [
   "10% Off",
-  "15% Off",
   "Free Shipping",
   "10% Off",
-  "15% Off",
+  "Free Shipping",
+  "10% Off",
   "Free Shipping",
 ] as const;
 
@@ -278,7 +278,7 @@ export function SpinToWinPopup() {
                 Spin to win!
               </h2>
               <p className="mx-auto mt-2.5 max-w-[520px] text-[14px] font-medium leading-[1.4] text-ink-soft sm:mt-3 sm:text-[17px]">
-                Enter your email for a chance to win discounts, freebies, and more!
+                Enter your email and spin to claim 10% Off or Free Shipping!
               </p>
 
               <div className="mx-auto mt-4 grid max-w-[520px] gap-2.5 sm:mt-5 sm:gap-3">
