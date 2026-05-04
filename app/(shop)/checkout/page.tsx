@@ -160,9 +160,9 @@ export default function CheckoutPage() {
   const etaPri = tierEtas?.eta_priority_minutes ?? null;
 
   return (
-    <div className="mx-auto max-w-[1280px] px-6 py-14">
+    <div className="mx-auto max-w-[1280px] px-6 py-8">
       <Eyebrow>Step 2 of 2</Eyebrow>
-      <h1 className="mt-4 font-display text-[44px] font-bold leading-[1] tracking-tight text-ink sm:text-[60px]">
+      <h1 className="mt-3 font-display text-[44px] font-bold leading-[1] tracking-tight text-ink sm:text-[60px]">
         Almost <span className="text-brand">there.</span>
       </h1>
 
@@ -178,8 +178,8 @@ export default function CheckoutPage() {
         </div>
       ) : null}
 
-      <form onSubmit={onSubmit} className="mt-12 grid gap-10 lg:grid-cols-[1fr_380px]">
-        <div className="space-y-10">
+      <form onSubmit={onSubmit} className="mt-8 grid gap-6 lg:grid-cols-[1fr_380px]">
+        <div className="space-y-6">
           <Section step="01" title="Where should we deliver?">
             {addresses.length > 0 && !newAddr ? (
               <div className="space-y-2.5">
@@ -460,7 +460,7 @@ function TierCard({
 function Section({ step, title, children }: { step: string; title: string; children: React.ReactNode }) {
   return (
     <section>
-      <div className="mb-5 flex items-baseline gap-4">
+      <div className="mb-3 flex items-baseline gap-4">
         <span className="inline-flex items-center rounded-full bg-ink px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-yellow">
           № {step}
         </span>
