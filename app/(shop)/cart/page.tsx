@@ -35,6 +35,7 @@ export default function CartPage() {
           product_id: i.product_id,
           variant_id: i.variant_id ?? null,
           quantity: i.quantity,
+          statement_category: i.statement_category ?? null,
         })),
         postcode: postcode || null,
       },

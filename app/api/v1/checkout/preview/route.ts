@@ -10,6 +10,7 @@ const Body = z.object({
     variant_id: z.string().uuid().optional().nullable(),
     quantity: z.number().int().min(1).max(500),
     options: z.record(z.string(), z.unknown()).optional().nullable(),
+    statement_category: z.string().max(100).optional().nullable(),
   })).min(1),
   postcode: z.string().optional().nullable(),
   delivery_tier: z.enum(["standard", "priority", "super"]).optional().nullable(),

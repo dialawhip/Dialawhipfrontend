@@ -9,6 +9,7 @@ export interface CartItem {
   variant_id?: string | null;
   quantity: number;
   options?: Record<string, unknown> | null;
+  statement_category?: string | null;
 }
 
 export interface PricedLine {
@@ -18,6 +19,7 @@ export interface PricedLine {
   unit_price_pence: number;
   line_total_pence: number;
   options: Record<string, unknown> | null;
+  statement_category: string | null;
 }
 
 export interface PriceResult {
@@ -93,6 +95,7 @@ export async function priceCart(
       unit_price_pence: unitPrice,
       line_total_pence: lineTotal,
       options: item.options ?? null,
+      statement_category: item.statement_category ?? null,
     });
   }
 

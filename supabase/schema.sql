@@ -220,6 +220,7 @@ create table if not exists public.order_items (
   unit_price_pence integer not null,
   line_total_pence integer not null,
   options_json jsonb,
+  statement_category text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

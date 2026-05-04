@@ -78,6 +78,7 @@ export async function createOrderFromCart(input: CreateOrderInput) {
     unit_price_pence: line.unit_price_pence,
     line_total_pence: line.line_total_pence,
     options_json: line.options ?? null,
+    statement_category: line.statement_category ?? null,
   }));
 
   const { error: itemsErr } = await admin.from("order_items").insert(itemRows);

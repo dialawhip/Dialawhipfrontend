@@ -108,6 +108,7 @@ export function serializeOrderItem(i: Row) {
     unit_price_pence: i.unit_price_pence,
     line_total_pence: i.line_total_pence,
     options: i.options_json ?? null,
+    statement_category: (i.statement_category as string | null | undefined) ?? null,
   };
 }
 
