@@ -54,6 +54,7 @@ export default function CheckoutPage() {
           product_id: i.product_id,
           variant_id: i.variant_id ?? null,
           quantity: i.quantity,
+          statement_category: i.statement_category ?? null,
         })),
         postcode: address?.postcode ?? null,
         delivery_tier: tier,
@@ -108,6 +109,7 @@ export default function CheckoutPage() {
               product_id: i.product_id,
               variant_id: i.variant_id ?? null,
               quantity: i.quantity,
+              statement_category: i.statement_category ?? null,
             })),
             address_id: addressId,
             delivery_tier: tier,
@@ -362,14 +364,21 @@ export default function CheckoutPage() {
             <h2 className="font-display text-[20px] font-bold text-ink">Your order</h2>
             <ul className="mt-5 space-y-3 text-[13px]">
               {items.map((i) => (
-                <li key={`${i.product_id}::${i.variant_id ?? ""}`} className="flex justify-between gap-4">
-                  <span className="font-medium text-ink-soft">
-                    <span className="font-display font-bold text-ink">{i.quantity} ×</span> {i.name}
-                    {i.variant_label ? (
-                      <span className="ml-1 text-[11px] font-bold uppercase tracking-[0.14em] text-brand">· {i.variant_label}</span>
-                    ) : null}
-                  </span>
-                  <Money pence={i.unit_price_pence * i.quantity} className="shrink-0 font-bold text-ink" />
+                <li key={`${i.product_id}::${i.variant_id ?? ""}`} className="space-y-0.5">
+                  <div className="flex justify-between gap-4">
+                    <span className="font-medium text-ink-soft">
+                      <span className="font-display font-bold text-ink">{i.quantity} ×</span> {i.name}
+                      {i.variant_label ? (
+                        <span className="ml-1 text-[11px] font-bold uppercase tracking-[0.14em] text-brand">· {i.variant_label}</span>
+                      ) : null}
+                    </span>
+                    <Money pence={i.unit_price_pence * i.quantity} className="shrink-0 font-bold text-ink" />
+                  </div>
+                  {i.statement_category ? (
+                    <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-muted">
+                      Use · {i.statement_category}
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ul>
