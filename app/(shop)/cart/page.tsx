@@ -69,18 +69,18 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-        <div className="rounded-3xl bg-yellow p-12 ring-2 ring-ink">
+      <div className="mx-auto max-w-2xl px-4 py-12 text-center sm:px-6 sm:py-24">
+        <div className="rounded-3xl bg-yellow p-6 ring-2 ring-ink sm:p-12">
           <Eyebrow className="justify-center">Your bag</Eyebrow>
-          <h1 className="mt-5 font-display text-[44px] font-bold tracking-tight text-ink sm:text-[60px]">
+          <h1 className="mt-5 font-display text-[32px] font-bold tracking-tight text-ink sm:text-[60px]">
             Nothing here yet.
           </h1>
-          <p className="mt-4 text-[15px] font-medium leading-relaxed text-ink/80">
+          <p className="mt-4 text-[14px] font-medium leading-relaxed text-ink/80 sm:text-[15px]">
             Your bag is empty. Pick something from the catalogue.
           </p>
           <Link
             href="/shop"
-            className="mt-8 inline-flex h-13 items-center rounded-full bg-ink px-8 text-[14px] font-bold text-yellow transition-transform hover:-translate-y-0.5"
+            className="mt-8 inline-flex h-13 items-center rounded-full bg-ink px-6 text-[13px] font-bold text-yellow transition-transform hover:-translate-y-0.5 sm:px-8 sm:text-[14px]"
           >
             Browse the catalogue →
           </Link>
@@ -90,14 +90,14 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] px-6 py-14">
+    <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-6 sm:py-14">
       <Eyebrow>Your bag</Eyebrow>
-      <h1 className="mt-4 font-display text-[44px] font-bold leading-[1] tracking-tight text-ink sm:text-[60px]">
+      <h1 className="mt-4 font-display text-[32px] font-bold leading-[1.05] tracking-tight text-ink sm:text-[60px] sm:leading-[1]">
         Let&rsquo;s go over your order.
       </h1>
 
       {shopClosed ? (
-        <div className="mt-8 rounded-2xl bg-yellow p-5 ring-2 ring-ink" role="alert">
+        <div className="mt-6 rounded-2xl bg-yellow p-4 ring-2 ring-ink sm:mt-8 sm:p-5" role="alert">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-[13px] font-bold text-yellow">!</span>
             <div>
@@ -108,65 +108,77 @@ export default function CartPage() {
         </div>
       ) : null}
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_380px]">
+      <div className="mt-8 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[1fr_380px]">
         <ul className="overflow-hidden rounded-2xl bg-paper ring-2 ring-ink/15">
           {items.map((i, idx) => (
             <li
               key={`${i.product_id}::${i.variant_id ?? ""}`}
               className={
-                "flex items-center gap-5 p-5 " +
+                "p-4 sm:flex sm:items-center sm:gap-5 sm:p-5 " +
                 (idx > 0 ? "border-t-2 border-ink/10" : "")
               }
             >
-              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-yellow ring-2 ring-ink">
-                <span className="font-display text-[18px] font-bold text-ink">
-                  {i.name.charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div className="flex-1">
-                <Link href={`/products/${i.slug}`} className="font-display text-[17px] font-bold leading-tight text-ink hover:text-brand">
-                  {i.name}
-                </Link>
-                {i.variant_label ? (
-                  <div className="mt-0.5 text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
-                    {i.variant_label}
-                  </div>
-                ) : null}
-                <div className="mt-1 text-[13px] font-medium text-ink-muted">
-                  <Money pence={i.unit_price_pence} /> {i.variant_id ? "each" : "per item"}
+              <div className="flex items-start gap-4 sm:contents">
+                <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-yellow ring-2 ring-ink sm:h-20 sm:w-20">
+                  <span className="font-display text-[16px] font-bold text-ink sm:text-[18px]">
+                    {i.name.charAt(0).toUpperCase()}
+                  </span>
                 </div>
-              </div>
-              <div className="flex h-10 items-center rounded-full border-2 border-ink bg-paper">
+                <div className="min-w-0 flex-1">
+                  <Link href={`/products/${i.slug}`} className="block break-words font-display text-[15px] font-bold leading-tight text-ink hover:text-brand sm:text-[17px]">
+                    {i.name}
+                  </Link>
+                  {i.variant_label ? (
+                    <div className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-brand sm:text-[11px]">
+                      {i.variant_label}
+                    </div>
+                  ) : null}
+                  <div className="mt-1 text-[12px] font-medium text-ink-muted sm:text-[13px]">
+                    <Money pence={i.unit_price_pence} /> {i.variant_id ? "each" : "per item"}
+                  </div>
+                </div>
                 <button
-                  className="flex h-10 w-10 items-center justify-center text-ink transition-colors hover:bg-yellow"
-                  onClick={() => setQuantity(i.product_id, i.quantity - 1, i.variant_id ?? null)}
-                  aria-label="Decrease"
+                  onClick={() => remove(i.product_id, i.variant_id ?? null)}
+                  className="shrink-0 p-1 text-ink-muted transition-colors hover:text-danger sm:hidden"
+                  aria-label="Remove"
                 >
-                  <Minus className="h-3.5 w-3.5" />
-                </button>
-                <span className="w-7 text-center font-display text-[15px] font-bold tabular-nums">{i.quantity}</span>
-                <button
-                  className="flex h-10 w-10 items-center justify-center text-ink transition-colors hover:bg-yellow"
-                  onClick={() => setQuantity(i.product_id, i.quantity + 1, i.variant_id ?? null)}
-                  aria-label="Increase"
-                >
-                  <Plus className="h-3.5 w-3.5" />
+                  <Trash2 className="h-4 w-4" />
                 </button>
               </div>
-              <Money pence={i.unit_price_pence * i.quantity} className="w-20 text-right font-display text-[17px] font-bold text-ink" />
-              <button
-                onClick={() => remove(i.product_id, i.variant_id ?? null)}
-                className="text-ink-muted transition-colors hover:text-danger"
-                aria-label="Remove"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
+
+              <div className="mt-4 flex items-center justify-between gap-3 sm:mt-0 sm:contents">
+                <div className="flex h-10 items-center rounded-full border-2 border-ink bg-paper">
+                  <button
+                    className="flex h-10 w-10 items-center justify-center text-ink transition-colors hover:bg-yellow"
+                    onClick={() => setQuantity(i.product_id, i.quantity - 1, i.variant_id ?? null)}
+                    aria-label="Decrease"
+                  >
+                    <Minus className="h-3.5 w-3.5" />
+                  </button>
+                  <span className="w-7 text-center font-display text-[15px] font-bold tabular-nums">{i.quantity}</span>
+                  <button
+                    className="flex h-10 w-10 items-center justify-center text-ink transition-colors hover:bg-yellow"
+                    onClick={() => setQuantity(i.product_id, i.quantity + 1, i.variant_id ?? null)}
+                    aria-label="Increase"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+                <Money pence={i.unit_price_pence * i.quantity} className="text-right font-display text-[16px] font-bold text-ink sm:w-20 sm:text-[17px]" />
+                <button
+                  onClick={() => remove(i.product_id, i.variant_id ?? null)}
+                  className="hidden text-ink-muted transition-colors hover:text-danger sm:block"
+                  aria-label="Remove"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
             </li>
           ))}
         </ul>
 
         <aside className="h-fit space-y-4">
-          <div className="rounded-2xl bg-paper p-6 ring-2 ring-ink">
+          <div className="rounded-2xl bg-paper p-5 ring-2 ring-ink sm:p-6">
             <h2 className="font-display text-[20px] font-bold text-ink">Order summary</h2>
 
             <div className="mt-5 space-y-2">
