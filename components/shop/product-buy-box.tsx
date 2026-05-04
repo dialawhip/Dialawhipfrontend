@@ -7,7 +7,19 @@ import { Money } from "@/components/ui/money";
 import type { Product, ProductVariant } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
-type BaseItem = Omit<CartItem, "quantity" | "variant_id" | "variant_label" | "unit_price_pence">;
+type BaseItem = Omit<CartItem, "quantity" | "variant_id" | "variant_label" | "unit_price_pence" | "statement_category">;
+
+const STATEMENT_CATEGORIES = [
+  "Catering Use",
+  "Catering / Single Event",
+  "Catering / Multiple Event",
+  "Home Use / Baking / Cooking",
+  "Cafe / Business Use",
+  "Restaurant / Business Use",
+  "Bar / Business Use",
+  "Erotic Use",
+  "Other",
+] as const;
 
 export function ProductBuyBox({ product, base }: { product: Product; base: BaseItem }) {
   const variants: ProductVariant[] = useMemo(
@@ -18,6 +30,8 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
   const [selectedId, setSelectedId] = useState<string | null>(variants[0]?.id ?? null);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [statementCategory, setStatementCategory] = useState<string>("");
+  const [showStatementError, setShowStatementError] = useState(false);
   const add = useCart((s) => s.add);
 
   const selected = selectedId ? variants.find((v) => v.id === selectedId) ?? null : null;
@@ -25,11 +39,16 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
   const lineTotal = unitPrice * qty;
 
   function onAdd() {
+    if (!statementCategory) {
+      setShowStatementError(true);
+      return;
+    }
     const cartItem: Omit<CartItem, "quantity"> = {
       ...base,
       unit_price_pence: unitPrice,
       variant_id: selected?.id ?? null,
       variant_label: selected?.label ?? null,
+      statement_category: statementCategory,
     };
     add(cartItem, qty);
     setAdded(true);
@@ -84,6 +103,47 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
           </div>
         </div>
       ) : null}
+
+      <div>
+        <label
+          htmlFor="statement-of-use"
+          className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-muted"
+        >
+          Statement of Use
+        </label>
+        <div className="relative mt-3">
+          <select
+            id="statement-of-use"
+            value={statementCategory}
+            onChange={(e) => {
+              setStatementCategory(e.target.value);
+              if (e.target.value) setShowStatementError(false);
+            }}
+            className={cn(
+              "block w-full appearance-none rounded-2xl border bg-paper px-4 py-3 pr-10 text-[15px] font-bold text-ink outline-none transition-colors focus:border-brand",
+              showStatementError ? "border-danger" : "hairline",
+            )}
+          >
+            <option value="">Please choose</option>
+            {STATEMENT_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-ink-soft"
+          >
+            ▾
+          </span>
+        </div>
+        {showStatementError ? (
+          <p className="mt-2 text-[12px] font-semibold text-danger">
+            Please choose a statement of use.
+          </p>
+        ) : null}
+      </div>
 
       <div className="flex items-stretch gap-2 sm:gap-3">
         <div className="flex h-12 shrink-0 items-center rounded-full border hairline bg-paper">
