@@ -14,6 +14,8 @@ export interface CartItem {
   unit_price_pence: number;
   image_url: string | null;
   quantity: number;
+  /** Buyer-declared category for the Statement of Use. */
+  statement_category?: string | null;
 }
 
 interface CartState {
