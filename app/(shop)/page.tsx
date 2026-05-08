@@ -78,8 +78,8 @@ function Hero({
 
       <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pt-14 pb-20 sm:px-6 sm:pt-20 sm:pb-28 md:grid-cols-[1.05fr_1fr] md:gap-12 md:pt-28 md:pb-36">
         <div className="relative z-10 flex flex-col justify-center">
-          <div className="inline-flex w-fit max-w-[calc(100%-80px)] items-center gap-2 rounded-full border-2 border-ink bg-paper px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-ink sm:max-w-none sm:text-[11px] sm:tracking-[0.18em]">
-            <span className="h-2 w-2 shrink-0 rounded-full bg-brand" /> <span className="truncate">{tagline}</span>
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-ink bg-paper px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-brand" /> {tagline}
           </div>
           <h1 className="mt-6 font-display text-[56px] font-bold leading-[0.92] tracking-[-0.03em] text-ink sm:text-[72px] md:text-[112px]">
             Out of gas?
@@ -154,7 +154,7 @@ function Hero({
 function Over18Badge() {
   return (
     <div
-      className="pointer-events-none absolute top-4 right-4 z-20 sm:top-6 sm:right-6 md:top-8 md:right-8"
+      className="pointer-events-none absolute top-20 right-4 z-20 sm:top-6 sm:right-6 md:top-8 md:right-8"
       aria-label="Strictly no under 18s"
     >
       <div className="flex h-[64px] w-[64px] rotate-[-8deg] flex-col items-center justify-center rounded-full border-[3px] border-[#c10b0b] bg-paper text-center shadow-[0_4px_0_0_rgba(0,0,0,0.9)] sm:h-[88px] sm:w-[88px] md:h-[104px] md:w-[104px]">
