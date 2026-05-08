@@ -35,6 +35,13 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
   return (
     <>
+      <div className="bg-ink text-paper">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-center gap-2 px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.14em] sm:text-[12px]">
+          <span className="text-yellow">Open from 6pm</span>
+          <span aria-hidden className="text-paper/40">·</span>
+          <span>Order now &amp; get free delivery on all pre-orders</span>
+        </div>
+      </div>
       <ShopHeader user={user} settings={settings} categories={categories} />
       {/* Visible on every customer-facing page when admin has set order.is_open = false. */}
       <div className="mx-auto w-full max-w-[1280px] px-6">

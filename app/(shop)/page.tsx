@@ -151,6 +151,26 @@ function Hero({
   );
 }
 
+function Over18Badge() {
+  return (
+    <div
+      className="pointer-events-none absolute top-4 right-4 z-20 sm:top-6 sm:right-6 md:top-8 md:right-8"
+      aria-label="Strictly no under 18s"
+    >
+      <div className="flex h-[72px] w-[72px] rotate-[-8deg] flex-col items-center justify-center rounded-full border-[3px] border-[#c10b0b] bg-paper text-center shadow-[0_4px_0_0_rgba(0,0,0,0.9)] sm:h-[88px] sm:w-[88px] md:h-[104px] md:w-[104px]">
+        <div className="font-display text-[22px] font-bold leading-none text-[#c10b0b] sm:text-[28px] md:text-[34px]">
+          18+
+        </div>
+        <div className="mt-0.5 text-[7px] font-bold uppercase tracking-[0.14em] text-ink sm:text-[8px] md:text-[9px]">
+          Strictly
+          <br />
+          no under 18s
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Stat({ k, v, tone }: { k: string; v: string; tone: "ink" | "paper" }) {
   return (
     <div>

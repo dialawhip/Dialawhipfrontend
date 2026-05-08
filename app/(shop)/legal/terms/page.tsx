@@ -12,9 +12,9 @@ export default function TermsPage() {
     >
       <Heading>1. Who we are</Heading>
       <p>
-        Dialawhip Ltd (company no. pending), trading as Dialawhip, registered at
-        Newcastle upon Tyne. References to "we", "us" and "our" are to
-        Dialawhip. References to "you" are to the person placing an order.
+        Dialawhip Ltd, trading as Dialawhip, registered at Newcastle upon Tyne.
+        References to "we", "us" and "our" are to Dialawhip. References to
+        "you" are to the person placing an order.
       </p>
 
       <Heading>2. Eligibility</Heading>
