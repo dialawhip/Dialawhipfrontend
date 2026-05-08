@@ -177,20 +177,22 @@ function Stat({ k, v, tone }: { k: string; v: string; tone: "ink" | "paper" }) {
 function Marquee() {
   const items = [
     "Cream deluxe",
-    "Cream supreme 2KG MAXXI",
+    "Cream supreme",
+    "2KG MAXXI",
     "Packaging",
     "PPE",
     "Whippers",
     "Bundles",
   ];
+  const loop = [...items, ...items];
   return (
     <section className="border-y-2 border-ink bg-ink py-5 text-paper">
-      <div className="mx-auto max-w-[1280px] overflow-hidden px-6">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:justify-between">
-          {items.map((b) => (
+      <div className="overflow-hidden">
+        <div className="marquee-track">
+          {loop.map((b, i) => (
             <span
-              key={b}
-              className="font-display text-[18px] font-bold text-paper/95 sm:text-[22px]"
+              key={`${b}-${i}`}
+              className="mx-12 whitespace-nowrap font-display text-[18px] font-bold text-paper/95 sm:text-[22px]"
             >
               {b}
             </span>
