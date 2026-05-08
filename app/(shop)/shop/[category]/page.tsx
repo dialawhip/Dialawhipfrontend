@@ -15,7 +15,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
     apiServer<{ data: Product[] }>("/api/v1/products", {
       auth: false,
       cache: "no-store",
-      query: { limit: 200, category: slug },
+      query: { limit: 200, category: slug, sort: "oldest" },
     }).catch(() => ({ data: [] })),
   ]);
 

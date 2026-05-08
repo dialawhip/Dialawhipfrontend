@@ -14,6 +14,7 @@ export const GET = handle(async (req: NextRequest) => {
   const categorySlug = params.get("filter[category]") || params.get("category");
   const search = params.get("filter[search]") || params.get("search");
   const featured = params.get("filter[featured]") || params.get("featured");
+  const sort = params.get("sort");
 
   let query = admin
     .from("products")
@@ -24,6 +25,10 @@ export const GET = handle(async (req: NextRequest) => {
 
   if (featured === "true" || featured === "1") {
     query = query.eq("is_featured", true).order("updated_at", { ascending: false });
+  } else if (sort === "oldest") {
+    query = query.order("created_at", { ascending: true });
+  } else if (sort === "newest") {
+    query = query.order("created_at", { ascending: false });
   } else {
     query = query.order("name", { ascending: true });
   }
