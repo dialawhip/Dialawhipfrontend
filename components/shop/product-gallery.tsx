@@ -38,7 +38,7 @@ export function ProductGallery({
   return (
     <div>
       <div
-        className="relative aspect-[4/5] overflow-hidden rounded-[22px] paper-grain"
+        className="relative aspect-square overflow-hidden rounded-[22px] paper-grain"
         style={{ backgroundColor: fallbackBg }}
       >
         {showFallback || !active ? (
@@ -55,7 +55,7 @@ export function ProductGallery({
           <img
             src={active}
             alt={alt}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-contain"
           />
         )}
 
