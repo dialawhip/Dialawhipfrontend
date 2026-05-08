@@ -176,14 +176,12 @@ function Stat({ k, v, tone }: { k: string; v: string; tone: "ink" | "paper" }) {
 
 function Marquee() {
   const items = [
-    "Cream Deluxe",
-    "Smartwhip",
-    "MAXXI",
-    "Mosa",
-    "iSi",
-    "Monin",
-    "Lavazza",
-    "Costa",
+    "Cream deluxe",
+    "Cream supreme 2KG MAXXI",
+    "Packaging",
+    "PPE",
+    "Whippers",
+    "Bundles",
   ];
   return (
     <section className="border-y-2 border-ink bg-ink py-5 text-paper">
