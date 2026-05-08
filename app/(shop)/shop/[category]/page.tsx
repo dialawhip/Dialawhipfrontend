@@ -39,7 +39,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
                 {category.name}.
               </h1>
               <p className="mt-4 max-w-lg text-[14px] font-medium leading-relaxed text-ink/85 md:text-[15px]">
-                All {prods.data.length} {category.name.toLowerCase()} we stock, sorted by popularity. 20-minute delivery across Newcastle.
+                All {prods.data.length} {category.name.toLowerCase()} we stock. 20-minute delivery across Newcastle.
               </p>
             </div>
 
