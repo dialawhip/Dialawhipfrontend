@@ -157,14 +157,9 @@ function Over18Badge() {
       className="pointer-events-none absolute top-20 right-4 z-20 sm:top-6 sm:right-6 md:top-8 md:right-8"
       aria-label="Strictly no under 18s"
     >
-      <div className="flex h-[64px] w-[64px] rotate-[-8deg] flex-col items-center justify-center rounded-full border-[3px] border-[#c10b0b] bg-paper text-center shadow-[0_4px_0_0_rgba(0,0,0,0.9)] sm:h-[88px] sm:w-[88px] md:h-[104px] md:w-[104px]">
-        <div className="font-display text-[19px] font-bold leading-none text-[#c10b0b] sm:text-[28px] md:text-[34px]">
+      <div className="flex h-[64px] w-[64px] rotate-[-8deg] items-center justify-center rounded-full border-[3px] border-[#c10b0b] bg-paper text-center shadow-[0_4px_0_0_rgba(0,0,0,0.9)] sm:h-[88px] sm:w-[88px] md:h-[104px] md:w-[104px]">
+        <div className="font-display text-[26px] font-bold leading-none text-[#c10b0b] sm:text-[36px] md:text-[44px]">
           18+
-        </div>
-        <div className="mt-0.5 text-[6px] font-bold uppercase tracking-[0.12em] text-ink sm:text-[8px] sm:tracking-[0.14em] md:text-[9px]">
-          Strictly
-          <br />
-          no under 18s
         </div>
       </div>
     </div>
