@@ -74,6 +74,8 @@ function Hero({
         aria-hidden
       />
 
+      <Over18Badge />
+
       <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pt-14 pb-20 sm:px-6 sm:pt-20 sm:pb-28 md:grid-cols-[1.05fr_1fr] md:gap-12 md:pt-28 md:pb-36">
         <div className="relative z-10 flex flex-col justify-center">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-ink bg-paper px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
@@ -85,7 +87,7 @@ function Hero({
             <span className="text-brand">Not for long.</span>
           </h1>
           <p className="mt-7 max-w-md text-[16px] leading-relaxed text-ink/85 sm:text-[18px]">
-            Premium cream chargers, tanks, syrups & coffee — at your kitchen
+            Premium cream chargers, tanks, packaging & PPE — at your kitchen
             door across Tyneside in <strong>under 20 minutes</strong>.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">

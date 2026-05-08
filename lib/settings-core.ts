@@ -84,7 +84,7 @@ export const DEFAULTS: PublicSettings = {
   "business.country": "United Kingdom",
   "seo.meta_title": "Dial A Whip — 20-minute Newcastle catering supplies",
   "seo.meta_description":
-    "Cream chargers, whippers, syrups, coffee and disposables — delivered across Newcastle in minutes. Trade & 18+.",
+    "Cream chargers, whippers, packaging and PPE — delivered across Newcastle in minutes. Trade & 18+.",
   "order.is_open": true,
   "order.minimum_pence": 1500,
   "compliance.age_minimum": 18,
