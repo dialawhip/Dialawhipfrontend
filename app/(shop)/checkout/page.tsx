@@ -9,13 +9,19 @@ import { apiClient, ApiRequestError, randomIdempotencyKey } from "@/lib/api-clie
 import type { Address, DeliveryTier, PricingResult, User } from "@/lib/types";
 import { Eyebrow } from "@/components/shop/eyebrow";
 
+const PRIORITY_AUTO_UPGRADE_PENCE = 15000;
+
 export default function CheckoutPage() {
   const items = useCart((s) => s.items);
+  const subtotalPence = useCart((s) => s.subtotalPence());
   const [user, setUser] = useState<User | null>(null);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
   const [notes, setNotes] = useState("");
-  const [tier, setTier] = useState<DeliveryTier>("standard");
+  const [tier, setTier] = useState<DeliveryTier>(
+    subtotalPence >= PRIORITY_AUTO_UPGRADE_PENCE ? "priority" : "standard",
+  );
+  const [tierManuallySet, setTierManuallySet] = useState(false);
   const [statementAccepted, setStatementAccepted] = useState(false);
   const [n2oAccepted, setN2oAccepted] = useState(false);
   const [pricing, setPricing] = useState<PricingResult | null>(null);
@@ -43,6 +49,15 @@ export default function CheckoutPage() {
       })
       .catch(() => setNewAddr(true));
   }, []);
+
+  useEffect(() => {
+    if (tierManuallySet) return;
+    if (subtotalPence >= PRIORITY_AUTO_UPGRADE_PENCE && tier === "standard") {
+      setTier("priority");
+    } else if (subtotalPence < PRIORITY_AUTO_UPGRADE_PENCE && tier === "priority") {
+      setTier("standard");
+    }
+  }, [subtotalPence, tier, tierManuallySet]);
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -253,11 +268,16 @@ export default function CheckoutPage() {
           </Section>
 
           <Section step="02" title="How fast?">
+            {subtotalPence >= PRIORITY_AUTO_UPGRADE_PENCE ? (
+              <div className="mb-3 rounded-lg border-2 border-brand/30 bg-brand/5 px-4 py-2.5 text-[12px] font-semibold text-brand">
+                ✓ Priority delivery added free on orders over £150.
+              </div>
+            ) : null}
             <div className="grid gap-2.5 sm:grid-cols-3">
               <TierCard
                 tier="standard"
                 current={tier}
-                onSelect={setTier}
+                onSelect={(t) => { setTierManuallySet(true); setTier(t); }}
                 name="Standard"
                 price={0}
                 eta={etaStd ? `${etaStd} min` : "18–35 min"}
@@ -266,17 +286,17 @@ export default function CheckoutPage() {
               <TierCard
                 tier="priority"
                 current={tier}
-                onSelect={setTier}
+                onSelect={(t) => { setTierManuallySet(true); setTier(t); }}
                 name="Priority"
-                price={tierEtas?.priority_fee_pence ?? 500}
+                price={subtotalPence >= PRIORITY_AUTO_UPGRADE_PENCE ? 0 : (tierEtas?.priority_fee_pence ?? 500)}
                 eta={etaPri ? `${etaPri} min` : "10–20 min"}
-                blurb="Jumps the queue."
+                blurb={subtotalPence >= PRIORITY_AUTO_UPGRADE_PENCE ? "Free over £150." : "Jumps the queue."}
                 highlighted
               />
               <TierCard
                 tier="super"
                 current={tier}
-                onSelect={setTier}
+                onSelect={(t) => { setTierManuallySet(true); setTier(t); }}
                 name="Super"
                 price={tierEtas?.super_fee_pence ?? 1500}
                 eta="8–15 min"

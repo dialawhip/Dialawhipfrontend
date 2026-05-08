@@ -113,6 +113,12 @@ export async function priceCart(
     if (tier === "super") deliveryFee += Number(serviceArea.super_fee_pence ?? 0);
     const freeThreshold = Number(await getSetting<number>("order.free_delivery_threshold_pence", 0));
     if (freeThreshold > 0 && subtotal >= freeThreshold && tier === "standard") deliveryFee = 0;
+    const priorityAutoThreshold = Number(
+      await getSetting<number>("order.priority_auto_threshold_pence", 15000),
+    );
+    if (priorityAutoThreshold > 0 && subtotal >= priorityAutoThreshold && tier === "priority") {
+      deliveryFee = 0;
+    }
     serviceAreaPayload = {
       postcode_prefix: String(serviceArea.postcode_prefix),
       eta_standard_minutes: Number(serviceArea.eta_standard_minutes),

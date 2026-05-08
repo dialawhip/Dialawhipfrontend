@@ -58,6 +58,7 @@ export const SETTINGS: SettingDef[] = [
   D("order.minimum_pence", "Minimum order", "int", "order", true, 2000),
   D("order.lead_time_hours", "Lead time (hours)", "int", "order", true, 0),
   D("order.free_delivery_threshold_pence", "Free delivery threshold", "int", "order", true, 0),
+  D("order.priority_auto_threshold_pence", "Free priority delivery threshold", "int", "order", true, 15000),
 
   // delivery defaults
   D("delivery.default_fee_pence", "Default delivery fee", "int", "delivery", false, 0),
