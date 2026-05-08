@@ -76,7 +76,7 @@ function Hero({
 
       <Over18Badge />
 
-      <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pt-14 pb-20 sm:px-6 sm:pt-20 sm:pb-28 md:grid-cols-[1.05fr_1fr] md:gap-12 md:pt-28 md:pb-36">
+      <div className="relative mx-auto grid max-w-[1280px] gap-10 px-5 pt-14 pb-10 sm:px-6 sm:pt-20 sm:pb-28 md:grid-cols-[1.05fr_1fr] md:gap-12 md:pt-28 md:pb-36">
         <div className="relative z-10 flex flex-col justify-center">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-ink bg-paper px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
             <span className="h-2 w-2 shrink-0 rounded-full bg-brand" /> {tagline}
@@ -223,7 +223,7 @@ function Marquee() {
 function FeatureProduct({ product }: { product: Product | null }) {
   if (!product) return null;
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-24">
+    <section className="mx-auto max-w-[1280px] px-6 py-12 sm:py-24">
       <div className="grid gap-10 rounded-3xl bg-ink p-8 text-paper md:grid-cols-[1fr_1.2fr] md:gap-14 md:p-14">
         <div className="relative flex items-center justify-center rounded-2xl bg-yellow p-10">
           {product.image_url ? (
@@ -286,7 +286,7 @@ function FeatureProduct({ product }: { product: Product | null }) {
 
 function BrandPitch() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-20 sm:py-24">
+    <section className="mx-auto max-w-[1280px] px-6 py-10 sm:py-24">
       <div className="relative overflow-hidden rounded-3xl border-2 border-ink bg-yellow px-6 py-12 sm:px-12 sm:py-16">
         <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand/10 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-brand/15 blur-3xl" />
@@ -359,7 +359,7 @@ function Shelves({ categories }: { categories: Category[] }) {
       }))
   ).slice(0, 8);
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-24">
+    <section className="mx-auto max-w-[1280px] px-6 py-12 sm:py-24">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <Eyebrow>Browse the catalogue</Eyebrow>
@@ -419,7 +419,7 @@ function HowItWorks() {
   ];
   return (
     <section className="bg-brand text-paper">
-      <div className="mx-auto max-w-[1280px] px-6 py-24 md:py-28">
+      <div className="mx-auto max-w-[1280px] px-6 py-12 md:py-28">
         <div className="grid items-end gap-8 md:grid-cols-[1fr_auto]">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
@@ -453,7 +453,7 @@ function HowItWorks() {
 
 function Compliance() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-24">
+    <section className="mx-auto max-w-[1280px] px-6 py-12 sm:py-24">
       <div className="grid gap-10 rounded-3xl bg-yellow p-10 md:grid-cols-[1.1fr_1fr] md:gap-14 md:p-14">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-ink px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-paper">
@@ -511,7 +511,7 @@ function Check({ children }: { children: React.ReactNode }) {
 
 function ClosingCta() {
   return (
-    <section className="bg-ink py-24 text-center text-paper">
+    <section className="bg-ink py-12 text-center text-paper sm:py-24">
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-yellow">
           Dialawhip · Newcastle
