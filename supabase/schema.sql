@@ -371,7 +371,7 @@ end $$;
 
 -- ============================================================================
 -- RLS: enable on all tables. The Next.js backend uses the service role key
--- and bypasses RLS — these policies provide defence in depth for any direct
+-- and bypasses RLS - these policies provide defence in depth for any direct
 -- Supabase access (e.g. anon key from the browser).
 -- ============================================================================
 alter table public.profiles enable row level security;
