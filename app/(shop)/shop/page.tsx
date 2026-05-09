@@ -122,7 +122,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
                     </Link>
                   </div>
                   <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                    {list.slice(0, 4).map((p) => (
+                    {list.map((p) => (
                       <ProductCard key={p.id} product={p} />
                     ))}
                   </div>
