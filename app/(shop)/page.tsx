@@ -452,6 +452,45 @@ function HowItWorks() {
   );
 }
 
+function ServiceAreaPreview() {
+  return (
+    <section className="mx-auto max-w-[1280px] px-6 py-12 sm:py-24">
+      <div className="grid gap-10 rounded-3xl bg-ink p-8 text-paper md:grid-cols-[1fr_1.2fr] md:gap-14 md:p-14">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
+            Service areas
+          </div>
+          <h2 className="mt-6 font-display text-[40px] font-bold leading-tight tracking-tight text-paper md:text-[48px]">
+            Delivery across the North East.
+          </h2>
+          <p className="mt-5 max-w-md text-[14px] leading-relaxed text-paper/75">
+            We cover Newcastle, Gateshead, Sunderland, Durham, and all surrounding areas within a 20-mile radius. Check your postcode in seconds.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/service-area"
+              className="inline-flex h-12 items-center rounded-full bg-yellow px-6 text-[13px] font-bold text-ink transition-transform hover:-translate-y-0.5"
+            >
+              Check my area →
+            </Link>
+            <a
+              href="mailto:hello@dialawhip.com"
+              className="inline-flex h-12 items-center rounded-full border-2 border-paper/30 px-6 text-[13px] font-bold text-paper transition-colors hover:border-paper"
+            >
+              Outside the zone?
+            </a>
+          </div>
+        </div>
+
+        <div className="rounded-2xl bg-paper p-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/delivery-map.svg" alt="Delivery coverage map showing Newcastle, Sunderland, and Durham" className="w-full h-auto" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Compliance() {
   return (
     <section className="mx-auto max-w-[1280px] px-6 py-12 sm:py-24">
