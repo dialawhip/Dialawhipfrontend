@@ -1,57 +1,110 @@
-<svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-  <!-- Background -->
-  <rect width="400" height="600" fill="#f5f5f5"/>
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+  <defs>
+    <!-- Gradient backgrounds -->
+    <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f4f9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8ecf1;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filters -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+    
+    <filter id="shadowLarge" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Map background -->
+  <rect width="400" height="400" fill="url(#mapGradient)"/>
   
-  <!-- Decorative hills/landscape -->
-  <path d="M 0 300 Q 100 250 200 280 T 400 300 L 400 600 L 0 600 Z" fill="#e8f5e9" opacity="0.3"/>
-  
-  <!-- Trees scattered -->
-  <g opacity="0.15">
-    <circle cx="50" cy="350" r="8" fill="#2d5016"/>
-    <circle cx="120" cy="380" r="8" fill="#2d5016"/>
-    <circle cx="280" cy="400" r="8" fill="#2d5016"/>
-    <circle cx="350" cy="340" r="8" fill="#2d5016"/>
-    <circle cx="80" cy="450" r="8" fill="#2d5016"/>
-    <circle cx="320" cy="480" r="8" fill="#2d5016"/>
+  <!-- Subtle grid lines -->
+  <g stroke="#d0d7de" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="100" x2="400" y2="100"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="0" y1="300" x2="400" y2="300"/>
+    <line x1="100" y1="0" x2="100" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="300" y1="0" x2="300" y2="400"/>
   </g>
 
-  <!-- Delivery radius circle (pink) -->
-  <circle cx="200" cy="280" r="140" fill="none" stroke="#ff4081" stroke-width="8" opacity="0.6" stroke-dasharray="5,5"/>
-  <text x="200" y="160" text-anchor="middle" font-size="12" font-weight="bold" fill="#ff4081" opacity="0.7">DELIVERY RADIUS</text>
+  <!-- Delivery radius circle -->
+  <circle cx="200" cy="180" r="110" fill="none" stroke="#ff4081" stroke-width="3" opacity="0.15"/>
+  <circle cx="200" cy="180" r="110" fill="none" stroke="#ff4081" stroke-width="2" stroke-dasharray="8,4" opacity="0.4"/>
 
-  <!-- Newcastle marker and label -->
-  <circle cx="200" cy="280" r="12" fill="#1a1a1a" stroke="#ffeb3b" stroke-width="3"/>
-  <text x="200" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">NEWCASTLE</text>
-  <circle cx="200" cy="280" r="3" fill="#ffeb3b"/>
+  <!-- Decorative location clusters (smaller service points) -->
+  <g opacity="0.4">
+    <circle cx="310" cy="250" r="3" fill="#90a4ae"/>
+    <circle cx="90" cy="280" r="3" fill="#90a4ae"/>
+    <circle cx="320" cy="150" r="3" fill="#90a4ae"/>
+    <circle cx="80" cy="160" r="3" fill="#90a4ae"/>
+  </g>
 
-  <!-- Sunderland marker and label -->
-  <circle cx="230" cy="340" r="10" fill="#666" stroke="#ffeb3b" stroke-width="2"/>
-  <text x="230" y="375" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">Sunderland</text>
+  <!-- Service areas (Sunderland) -->
+  <g filter="url(#shadow)">
+    <circle cx="230" cy="230" r="14" fill="#ffd54f" stroke="#fff" stroke-width="2"/>
+    <circle cx="230" cy="230" r="10" fill="#ffb300" opacity="0.8"/>
+  </g>
 
-  <!-- Durham marker and label -->
-  <circle cx="160" cy="380" r="10" fill="#666" stroke="#ffeb3b" stroke-width="2"/>
-  <text x="160" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a1a">Durham</text>
+  <!-- Service areas (Durham) -->
+  <g filter="url(#shadow)">
+    <circle cx="150" cy="270" r="14" fill="#ffb74d" stroke="#fff" stroke-width="2"/>
+    <circle cx="150" cy="270" r="10" fill="#ff9800" opacity="0.8"/>
+  </g>
 
-  <!-- Gateshead marker and label -->
-  <circle cx="170" cy="290" r="8" fill="#999" stroke="#ffeb3b" stroke-width="1.5"/>
-  <text x="170" y="310" text-anchor="middle" font-size="11" font-weight="500" fill="#666">Gateshead</text>
+  <!-- Gateshead marker -->
+  <g filter="url(#shadow)">
+    <circle cx="160" cy="170" r="12" fill="#90caf9" stroke="#fff" stroke-width="2"/>
+    <circle cx="160" cy="170" r="8" fill="#42a5f5" opacity="0.8"/>
+  </g>
 
-  <!-- Key neighborhoods -->
-  <text x="240" y="240" font-size="10" font-weight="500" fill="#666" opacity="0.8">Jesmond</text>
-  <text x="140" y="250" font-size="10" font-weight="500" fill="#666" opacity="0.8">Heaton</text>
-  <text x="260" y="290" font-size="10" font-weight="500" fill="#666" opacity="0.8">Gosforth</text>
-  <text x="100" y="320" font-size="10" font-weight="500" fill="#666" opacity="0.8">West End</text>
+  <!-- Main hub (Newcastle) - prominent pin -->
+  <g filter="url(#shadowLarge)">
+    <circle cx="200" cy="180" r="18" fill="#ffeb3b" stroke="#fff" stroke-width="3"/>
+    <circle cx="200" cy="180" r="13" fill="#fbc02d"/>
+    <circle cx="200" cy="180" r="6" fill="#f57f17"/>
+  </g>
 
-  <!-- Legend -->
+  <!-- Location labels with better typography -->
+  <text x="200" y="168" text-anchor="middle" font-size="8" font-weight="700" fill="#1a1a1a" letter-spacing="0.4">NEWCASTLE</text>
+  
+  <text x="230" y="248" text-anchor="middle" font-size="10" font-weight="600" fill="#1a1a1a">Sunderland</text>
+  <text x="150" y="288" text-anchor="middle" font-size="10" font-weight="600" fill="#1a1a1a">Durham</text>
+  <text x="160" y="186" text-anchor="middle" font-size="8" font-weight="500" fill="#555">Gateshead</text>
+
+  <!-- Neighborhood labels (lighter) -->
+  <text x="250" y="140" text-anchor="middle" font-size="7" font-weight="400" fill="#999" opacity="0.7">Jesmond</text>
+  <text x="120" y="140" text-anchor="middle" font-size="7" font-weight="400" fill="#999" opacity="0.7">Heaton</text>
+  <text x="280" y="185" text-anchor="middle" font-size="7" font-weight="400" fill="#999" opacity="0.7">Gosforth</text>
+  <text x="90" y="210" text-anchor="middle" font-size="7" font-weight="400" fill="#999" opacity="0.7">West End</text>
+
+  <!-- Radius label -->
+  <text x="200" y="95" text-anchor="middle" font-size="9" font-weight="600" fill="#ff4081" opacity="0.6" letter-spacing="0.3">DELIVERY RADIUS</text>
+
+  <!-- Legend box -->
   <g>
-    <rect x="20" y="520" width="360" height="60" fill="white" stroke="#ccc" stroke-width="1" rx="4"/>
-    <circle cx="35" cy="540" r="6" fill="#1a1a1a" stroke="#ffeb3b" stroke-width="2"/>
-    <text x="50" y="545" font-size="12" font-weight="600" fill="#1a1a1a">Main Hub</text>
+    <!-- Background -->
+    <rect x="12" y="330" width="376" height="58" fill="white" stroke="#d0d7de" stroke-width="1.5" rx="6" opacity="0.95"/>
     
-    <circle cx="35" cy="565" r="5" fill="#666" stroke="#ffeb3b" stroke-width="1.5"/>
-    <text x="50" y="570" font-size="12" font-weight="600" fill="#666">Service Areas</text>
-    
-    <line x1="200" y1="555" x2="220" y2="555" stroke="#ff4081" stroke-width="2" stroke-dasharray="2,2" opacity="0.6"/>
-    <text x="230" y="560" font-size="12" font-weight="600" fill="#ff4081">Delivery Radius</text>
+    <!-- Legend items -->
+    <g>
+      <!-- Main Hub -->
+      <circle cx="30" cy="345" r="6" fill="#ffeb3b" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="30" cy="345" r="3" fill="#f57f17"/>
+      <text x="42" y="349" font-size="11" font-weight="600" fill="#1a1a1a">Main Hub</text>
+      
+      <!-- Service Areas -->
+      <circle cx="30" cy="365" r="6" fill="#ffb300" stroke="#fff" stroke-width="1.5"/>
+      <text x="42" y="369" font-size="11" font-weight="600" fill="#1a1a1a">Service Areas</text>
+      
+      <!-- Delivery Radius -->
+      <line x1="30" y1="378" x2="40" y2="378" stroke="#ff4081" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/>
+      <text x="42" y="382" font-size="11" font-weight="600" fill="#ff4081" opacity="0.8">Delivery Radius</text>
+    </g>
   </g>
+
+  <!-- Subtle corner accents -->
+  <circle cx="15" cy="15" r="1.5" fill="#ff4081" opacity="0.1"/>
+  <circle cx="385" cy="385" r="1.5" fill="#ff4081" opacity="0.1"/>
 </svg>
