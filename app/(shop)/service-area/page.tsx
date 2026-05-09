@@ -120,20 +120,14 @@ export default function ServiceAreaPage() {
         <div className="relative hidden md:block">
           <div className="rounded-3xl bg-ink p-10 text-paper ring-2 ring-ink">
             <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-yellow">
-              Zones we cover
+              Service areas
             </div>
-            <div className="mt-8 grid grid-cols-4 gap-3">
-              {ZONES.map((z) => (
-                <div
-                  key={z}
-                  className="flex h-16 items-center justify-center rounded-md bg-yellow font-display text-[18px] font-bold text-ink"
-                >
-                  {z}
-                </div>
-              ))}
+            <div className="mt-8">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/delivery-map.svg" alt="Delivery radius map covering Newcastle, Sunderland, and Durham" className="w-full h-auto"/>
             </div>
             <div className="mt-10 border-t-2 border-paper/15 pt-6 text-[13px] font-medium leading-relaxed text-paper/70">
-              Outside these zones? We take bookings for special events further afield — ask us about corporate, weddings, and private parties.
+              We deliver within a 20-mile radius of Newcastle city centre, covering Newcastle, Gateshead, Sunderland, Durham, and surrounding areas. Outside this zone? Get in touch for special event bookings.
             </div>
           </div>
         </div>

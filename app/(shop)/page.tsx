@@ -50,6 +50,7 @@ export default async function HomePage() {
       <BrandPitch />
       <Shelves categories={categories} />
       <HowItWorks />
+      <ServiceAreaPreview />
       <Compliance />
       <ClosingCta />
     </>
@@ -431,7 +432,7 @@ function HowItWorks() {
           </div>
           <p className="max-w-sm text-[14px] leading-relaxed text-paper/75">
             We carry stock close to the city so your kitchen doesn&rsquo;t stop
-            when it runs out. Order by 03:00, Tuesday to Sunday.
+            when it runs out. Order by 06:00, 7 days a week.
           </p>
         </div>
 

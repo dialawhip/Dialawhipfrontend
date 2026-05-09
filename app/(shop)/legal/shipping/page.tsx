@@ -30,8 +30,7 @@ export default function ShippingPage() {
 
       <Heading>Cutoff times</Heading>
       <p>
-        We operate Tuesday to Sunday, 10:00 until 03:00. We are closed
-        Mondays. Orders placed within operating hours are dispatched
+        We operate 7 days a week, 18:00 until 06:00. Orders placed within operating hours are dispatched
         immediately; outside of hours, orders are queued for the next morning.
       </p>
 

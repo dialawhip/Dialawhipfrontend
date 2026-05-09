@@ -12,8 +12,7 @@ export default function TermsPage() {
     >
       <Heading>1. Who we are</Heading>
       <p>
-        Dialawhip Ltd, trading as Dialawhip, registered at Newcastle upon Tyne.
-        References to "we", "us" and "our" are to Dialawhip. References to
+        NORTH EAST CATERING SUPPLIES LTD, company number 17185956, registered at 38 Collingwood Street, NE1 1JF. References to "we", "us" and "our" are to Dialawhip. References to
         "you" are to the person placing an order.
       </p>
 

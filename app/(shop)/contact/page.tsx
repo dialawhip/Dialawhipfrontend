@@ -102,6 +102,43 @@ export default async function ContactPage() {
             </div>
           </div>
         </div>
+
+        <div className="mt-10 rounded-3xl bg-paper p-10 ring-2 ring-ink/10 md:p-16">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            {supportEmail ? (
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
+                  Customer Service
+                </div>
+                <h3 className="mt-6 font-display text-[32px] font-bold leading-[1] tracking-tight text-ink">
+                  Need help?
+                </h3>
+                <p className="mt-4 text-[14px] font-medium leading-relaxed text-ink/75">
+                  Questions about your order or account? Our customer service team is here to help.
+                </p>
+                <a href={`mailto:${supportEmail}`} className="mt-6 inline-flex h-12 items-center rounded-full bg-ink px-7 text-[14px] font-bold text-yellow transition-transform hover:-translate-y-0.5">
+                  Contact support
+                </a>
+              </div>
+            ) : null}
+            {email ? (
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
+                  Complaints
+                </div>
+                <h3 className="mt-6 font-display text-[32px] font-bold leading-[1] tracking-tight text-ink">
+                  File a complaint
+                </h3>
+                <p className="mt-4 text-[14px] font-medium leading-relaxed text-ink/75">
+                  We take feedback seriously. If you have a complaint, please get in touch with us directly.
+                </p>
+                <a href={`mailto:${email}?subject=Complaint`} className="mt-6 inline-flex h-12 items-center rounded-full bg-ink px-7 text-[14px] font-bold text-yellow transition-transform hover:-translate-y-0.5">
+                  Submit complaint
+                </a>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
     </>
   );

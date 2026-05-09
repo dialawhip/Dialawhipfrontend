@@ -45,7 +45,7 @@ export default function AboutPage() {
             Grainger Market, Stall 42.
           </h2>
           <p className="mt-4 max-w-xl text-[15px] font-medium leading-relaxed text-ink/85">
-            Our service window is open Tuesday to Sunday, 10:00–03:00. Closed Mondays. Drop in, pick up in person, or place an order at the counter.
+            Our service window is open 7 days a week, 18:00–06:00. Drop in, pick up in person, or place an order at the counter.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
