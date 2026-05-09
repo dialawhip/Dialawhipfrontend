@@ -24,7 +24,7 @@ export default function AboutPage() {
               Dialawhip was started by a pastry chef and a logistics engineer who kept running out of chargers at 2am. The suppliers were closed. The big chains wouldn&rsquo;t ship until Thursday. So we built the thing we wished existed.
             </p>
             <p>
-              We hold real stock in a unit off the Quayside — chargers, tanks, syrups, coffee, packaging — and we dispatch by motorbike and electric van across Tyneside. Eighteen minutes from bag to door is the median. Thirty is the worst we&rsquo;ve done.
+              We hold real stock in a unit off the Quayside - chargers, tanks, syrups, coffee, packaging - and we dispatch by motorbike and electric van across Tyneside. Eighteen minutes from bag to door is the median. Thirty is the worst we've done.
             </p>
             <p>
               We supply bars, cafés, restaurants, wedding caterers, film-set kitchens, and the occasional very-ambitious home cook. Everything we sell for culinary use is sold under a clear statement of use — because the law says so, and because that&rsquo;s how you stay open.

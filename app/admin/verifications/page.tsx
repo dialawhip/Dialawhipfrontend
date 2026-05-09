@@ -12,7 +12,7 @@ type TabStatus = typeof TABS[number];
 async function loadCounts(): Promise<Record<TabStatus, number>> {
   const admin = supabaseAdmin();
   // First, sweep so the counts reflect current reality.
-  try { await admin.rpc("expire_old_id_verifications"); } catch { /* swallow — non-critical */ }
+  try { await admin.rpc("expire_old_id_verifications"); } catch { /* swallow - non-critical */ }
 
   const counts: Record<TabStatus, number> = { pending: 0, approved: 0, rejected: 0, expired: 0 };
   await Promise.all(
@@ -39,7 +39,7 @@ export default async function AdminVerificationsPage({
   const [res, counts] = await Promise.all([
     apiServer<{ data: IdVerification[] }>("/api/v1/admin/verifications", {
       query: {
-        // Route handler accepts the direct key (`status`) — `filter.xxx`
+        // Route handler accepts the direct key (`status`) - `filter.xxx`
         // with a dot would slip through both server-side branches.
         status,
         search: search || undefined,

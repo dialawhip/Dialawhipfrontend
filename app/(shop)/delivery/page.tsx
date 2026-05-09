@@ -86,7 +86,7 @@ export default function DeliveryPage() {
             </table>
           </div>
           <p className="mt-6 text-[13px] font-medium text-paper/70">
-            Outside our zone? We can courier next-day across the UK —
+            Outside our zone? We can courier next-day across the UK -
             <Link href="/contact" className="ml-1 font-bold text-yellow underline underline-offset-4">get in touch</Link>.
           </p>
         </section>

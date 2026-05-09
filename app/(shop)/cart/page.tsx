@@ -226,7 +226,7 @@ export default function CartPage() {
                 disabled
                 className="mt-6 inline-flex h-13 w-full cursor-not-allowed items-center justify-center rounded-full bg-stone-soft px-6 text-[13px] font-bold text-ink-muted"
               >
-                Shop closed — try again later
+                Shop closed - try again later
               </button>
             ) : (
               <Link

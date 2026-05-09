@@ -320,7 +320,7 @@ export default function CheckoutPage() {
                   <div className="rounded-lg border border-yellow/60 bg-yellow-soft p-4 text-[13px]">
                     <div className="font-bold text-ink">ID verification required</div>
                     <div className="mt-1 text-ink-soft">
-                      Upload a government-issued ID once — approved inside ten minutes.{" "}
+                      Upload a government-issued ID once - approved inside ten minutes.{" "}
                       <Link href="/account/verification" className="font-semibold text-brand underline underline-offset-2">
                         Start verification →
                       </Link>
@@ -422,7 +422,7 @@ export default function CheckoutPage() {
               {pending
                 ? "Starting secure checkout…"
                 : shopClosed
-                ? "Shop closed — try again later"
+                ? "Shop closed - try again later"
                 : "Pay securely →"}
             </button>
             <p className="mt-3 text-center text-[11px] font-medium text-ink-muted">

@@ -43,7 +43,7 @@ export default async function DeliveryDetail({ params }: { params: Params }) {
         <StatusBadge status={order.status} />
       </div>
 
-      {/* Customer ID match card — age-restricted only */}
+      {/* Customer ID match card - age-restricted only */}
       {order.customer_id_card ? (
         <div className="mt-6 overflow-hidden rounded-2xl bg-yellow ring-2 ring-ink">
           <div className="flex items-center justify-between gap-3 border-b-2 border-ink px-5 py-3">
@@ -67,10 +67,10 @@ export default async function DeliveryDetail({ params }: { params: Params }) {
             <div className="mt-4 rounded-xl bg-ink p-4 text-paper">
               <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">Recipient</div>
               <div className="mt-1.5 font-display text-[20px] font-bold">
-                {order.customer?.name ?? "—"}
+                {order.customer?.name ?? "-"}
               </div>
               <p className="mt-2 text-[12px] font-medium leading-relaxed text-paper/75">
-                Confirm the photo, name and apparent age before handing over. Refuse delivery if unsure — log a reason in the note below.
+                Confirm the photo, name and apparent age before handing over. Refuse delivery if unsure - log a reason in the note below.
               </p>
             </div>
           </div>

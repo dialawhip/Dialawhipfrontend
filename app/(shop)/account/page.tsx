@@ -23,7 +23,7 @@ export default async function AccountPage() {
                 <span className="text-brand">{firstName}.</span>
               </h1>
               <p className="mt-6 max-w-xl text-[15px] font-medium leading-relaxed text-ink/80 md:text-[17px]">
-                Track orders, manage your addresses, and reorder favourites — all here.
+                Track orders, manage your addresses, and reorder favourites - all here.
               </p>
             </div>
             <div className="hidden shrink-0 md:block">

@@ -46,7 +46,7 @@ export default function VerificationPage() {
 
   useEffect(() => {
     load();
-    // Refresh when the tab regains focus — covers the common case where
+    // Refresh when the tab regains focus - covers the common case where
     // the customer was waiting for admin approval in another tab.
     function onFocus() { load(); }
     window.addEventListener("focus", onFocus);
@@ -87,7 +87,7 @@ export default function VerificationPage() {
 
   const status = data?.user_status ?? "unverified";
 
-  // Verified users get a focused "all done" view — no upload form, no
+  // Verified users get a focused "all done" view - no upload form, no
   // "how it works" steps, no instructional copy. Just the confirmation,
   // the approval date, and a shortcut back to the shop.
   if (status === "verified") {
@@ -284,7 +284,7 @@ export default function VerificationPage() {
           <div className="space-y-5 rounded-2xl bg-yellow p-8 ring-2 ring-ink">
             <h2 className="font-display text-[28px] font-bold text-ink">Under review.</h2>
             <p className="text-[14px] font-medium leading-relaxed text-ink/80">
-              Thanks — a compliance reviewer is looking at your document. Usually inside ten minutes during operating hours.
+              Thanks - a compliance reviewer is looking at your document. Usually inside ten minutes during operating hours.
             </p>
             <Link
               href="/shop"
@@ -356,7 +356,7 @@ function StatusBanner({
         <div>
           <div className="font-display text-[15px] font-bold">Account verified</div>
           <div className="mt-0.5 text-[12px] font-medium text-yellow">
-            Approved {verifiedAt ? new Date(verifiedAt).toLocaleDateString("en-GB") : "—"} · valid for 2 years
+            Approved {verifiedAt ? new Date(verifiedAt).toLocaleDateString("en-GB") : "-"} · valid for 2 years
           </div>
         </div>
       </div>
@@ -390,7 +390,7 @@ function StatusBanner({
               </div>
             ) : null}
             <p className="mt-3 text-[13px] font-medium text-ink/75">
-              Please upload a new photo below — fixing the issue above. Most rejections are resolved on the second try.
+              Please upload a new photo below - fixing the issue above. Most rejections are resolved on the second try.
             </p>
           </div>
         </div>

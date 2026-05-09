@@ -39,7 +39,7 @@ export default async function DriverDashboard() {
             <li className="rounded-2xl bg-paper p-8 text-center ring-2 ring-ink/15">
               <p className="font-display text-[18px] font-bold text-ink">All clear.</p>
               <p className="mt-1 text-[12px] font-medium text-ink-muted">
-                No active deliveries — sit tight.
+                No active deliveries - sit tight.
               </p>
             </li>
           ) : null}

@@ -27,11 +27,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const s = await getPublicSettings();
 
   const name = settingString(s, "business.name", "Dial A Whip");
-  const titleDefault = settingString(s, "seo.meta_title", `${name} — 20-minute Newcastle catering supplies`);
+  const titleDefault = settingString(s, "seo.meta_title", `${name} - 20-minute Newcastle catering supplies`);
   const description = settingString(
     s,
     "seo.meta_description",
-    "Cream chargers, whippers, packaging and PPE — delivered across Newcastle in minutes.",
+    "Cream chargers, whippers, packaging and PPE - delivered across Newcastle in minutes.",
   );
   const keywords = settingString(s, "seo.meta_keywords");
   const favicon = settingString(s, "branding.favicon_url");

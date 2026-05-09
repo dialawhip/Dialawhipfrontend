@@ -34,7 +34,7 @@ export default async function ContactPage() {
               Get in <span className="text-brand">touch.</span>
             </h1>
             <p className="mt-7 text-[16px] font-medium leading-relaxed text-ink/85 md:text-[18px]">
-              Questions about a booking, trade account, or something bespoke? We&rsquo;re on hand Tue–Sun — drop us a line.
+              Questions about a booking, trade account, or something bespoke? We're on hand Tue-Sun - drop us a line.
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default async function ContactPage() {
                 Something <span className="text-yellow">bigger</span> in mind?
               </h2>
               <p className="mt-7 max-w-md text-[15px] font-medium leading-relaxed text-paper/75">
-                Weddings, office events, private bars — we set up trade accounts with discounted pricing, account managers, and 24/7 ordering.
+                Weddings, office events, private bars - we set up trade accounts with discounted pricing, account managers, and 24/7 ordering.
               </p>
             </div>
             <div className="space-y-3">
