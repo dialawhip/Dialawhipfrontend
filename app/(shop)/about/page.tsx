@@ -24,7 +24,7 @@ export default function AboutPage() {
               Dialawhip was started by a pastry chef and a logistics engineer who kept running out of chargers at 2am. The suppliers were closed. The big chains wouldn&rsquo;t ship until Thursday. So we built the thing we wished existed.
             </p>
             <p>
-              We hold real stock in a unit off the Quayside - chargers, tanks, syrups, coffee, packaging - and we dispatch by motorbike and electric van across Tyneside. Eighteen minutes from bag to door is the median. Thirty is the worst we've done.
+              We hold real stock in a unit off the Quayside - chargers, tanks, syrups, coffee, packaging - and we dispatch by motorbike and electric van across the North East. Eighteen minutes from bag to door is the median. Thirty is the worst we've done.
             </p>
             <p>
               We supply bars, cafés, restaurants, wedding caterers, film-set kitchens, and the occasional very-ambitious home cook. Everything we sell for culinary use is sold under a clear statement of use — because the law says so, and because that&rsquo;s how you stay open.
@@ -42,10 +42,10 @@ export default function AboutPage() {
         <section className="mt-20 rounded-3xl bg-yellow p-10 ring-2 ring-ink md:p-14">
           <Eyebrow>Visit us</Eyebrow>
           <h2 className="mt-6 font-display text-[36px] font-bold leading-tight tracking-tight text-ink md:text-[52px]">
-            Grainger Market, Stall 42.
+            38 Collingwood Street, NE1 1JF.
           </h2>
           <p className="mt-4 max-w-xl text-[15px] font-medium leading-relaxed text-ink/85">
-            Our service window is open 7 days a week, 18:00–06:00. Drop in, pick up in person, or place an order at the counter.
+            Our service window is open 7 days a week, 18:00–06:00 AM. Drop in, pick up in person, or place an order at the counter.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link

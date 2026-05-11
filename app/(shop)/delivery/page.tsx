@@ -5,7 +5,7 @@ import { PostcodeChecker } from "@/components/shop/postcode-checker";
 export const metadata = { title: "Delivery · Dialawhip" };
 
 const TIERS = [
-  { name: "Standard", price: "Included", eta: "18–35 min", blurb: "Our default service across Tyneside. First-come-first-served dispatch." },
+  { name: "Standard", price: "Included", eta: "18–35 min", blurb: "Our default service across the North East. First-come-first-served dispatch." },
   { name: "Priority", price: "+£5", eta: "10–20 min", blurb: "Jumps the dispatch queue. Recommended if service is mid-rush." },
   { name: "Super-priority", price: "+£15", eta: "8–15 min", blurb: "Dedicated rider dispatched immediately. Genuine emergencies only." },
 ];
@@ -16,6 +16,9 @@ const ZONES = [
   { prefix: "NE9–NE13", name: "Low Fell, Team Valley, Longbenton", eta: "28 min" },
   { prefix: "NE15, NE20", name: "Denton, Ponteland", eta: "30 min" },
   { prefix: "NE25–NE30", name: "Whitley Bay, North Shields, Tynemouth", eta: "35 min" },
+  { prefix: "NE31–NE34", name: "South Shields, Jarrow, Hebburn", eta: "40 min" },
+  { prefix: "SR1–SR6", name: "Sunderland, Roker, Washington", eta: "45 min" },
+  { prefix: "DH1–DH9", name: "Durham, Chester-le-Street, Stanley", eta: "55 min" },
 ];
 
 export default function DeliveryPage() {

@@ -8,7 +8,7 @@ export default function TermsPage() {
       eyebrow="Legal"
       title={<>Terms &amp; <span className="italic font-light text-forest">conditions</span>.</>}
       updated="24 April 2026"
-      lead="These terms govern your use of Dialawhip — the rapid catering-supplies service operating across Tyneside."
+      lead="These terms govern your use of Dialawhip — the rapid catering-supplies service operating across the North East."
     >
       <Heading>1. Who we are</Heading>
       <p>

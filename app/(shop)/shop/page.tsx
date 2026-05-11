@@ -41,7 +41,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
               </h1>
               <p className="mt-4 max-w-xl text-[14px] font-medium leading-relaxed text-ink/85 md:text-[15px]">
                 {prods.data.length} products in stock across {cats.data.length} categories.
-                20-minute delivery across Tyneside.
+                20-minute delivery across the North East.
               </p>
             </div>
 
@@ -102,8 +102,15 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
         ) : (
           <div className="mt-12 space-y-20">
             {cats.data.map((c) => {
-              const list = byCategory.get(c.slug);
-              if (!list || list.length === 0) return null;
+              const raw = byCategory.get(c.slug);
+              if (!raw || raw.length === 0) return null;
+              const list = c.slug === "cream-chargers"
+                ? [...raw].sort((a, b) => {
+                    const ai = /isi/i.test(a.name) ? 1 : 0;
+                    const bi = /isi/i.test(b.name) ? 1 : 0;
+                    return ai - bi;
+                  })
+                : raw;
               return (
                 <section key={c.id}>
                   <div className="flex items-end justify-between">

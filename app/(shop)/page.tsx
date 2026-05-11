@@ -89,7 +89,7 @@ function Hero({
           </h1>
           <p className="mt-7 max-w-md text-[16px] leading-relaxed text-ink/85 sm:text-[18px]">
             Premium cream chargers, tanks, packaging & PPE — at your kitchen
-            door across Tyneside in <strong>under 20 minutes</strong>.
+            door across the North East in <strong>under 20 minutes</strong>.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
@@ -110,7 +110,7 @@ function Hero({
 
           <div className="mt-12 grid grid-cols-3 gap-5 border-t-2 border-ink/15 pt-7">
             <Stat k="18" v="Min avg delivery" tone="ink" />
-            <Stat k="20mi" v="Tyneside coverage" tone="ink" />
+            <Stat k="20mi" v="North East coverage" tone="ink" />
             <Stat k="24/7" v="Driver tracking" tone="ink" />
           </div>
         </div>
@@ -387,18 +387,18 @@ function Shelves({ categories }: { categories: Category[] }) {
             <Link
               key={c.slug}
               href={`/shop/${c.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-paper p-7 ring-2 ring-ink/10 transition-all hover:ring-brand"
+              className="group relative overflow-hidden rounded-2xl bg-brand p-7 ring-2 ring-brand/20 transition-all hover:ring-yellow"
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand">
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">
                 № {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="mt-6 font-display text-[22px] font-bold leading-tight text-ink transition-colors group-hover:text-brand">
+              <h3 className="mt-6 font-display text-[22px] font-bold leading-tight text-paper transition-colors group-hover:text-yellow">
                 {c.name}
               </h3>
-              <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-ink-muted">
+              <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-paper/75">
                 {blurb}
               </p>
-              <div className="mt-7 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/60 transition-colors group-hover:text-brand">
+              <div className="mt-7 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70 transition-colors group-hover:text-yellow">
                 <span>Browse shelf</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </div>
@@ -430,9 +430,9 @@ function HowItWorks() {
               Faster than your usual supplier.
             </h2>
           </div>
-          <p className="max-w-sm text-[14px] leading-relaxed text-paper/75">
+          <p className="max-w-sm text-[14px] leading-relaxed text-paper">
             We carry stock close to the city so your kitchen doesn&rsquo;t stop
-            when it runs out. Order by 06:00, 7 days a week.
+            when it runs out. Order by 06:00 AM, 7 days a week.
           </p>
         </div>
 
@@ -443,7 +443,7 @@ function HowItWorks() {
                 {s.n}
               </div>
               <h3 className="mt-7 font-display text-[20px] font-bold text-paper">{s.t}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-paper/75">{s.d}</p>
+              <p className="mt-2 text-[13px] leading-relaxed text-paper/90">{s.d}</p>
             </li>
           ))}
         </ol>

@@ -33,7 +33,7 @@ export default function TradePage() {
             Open an account
           </div>
           <h2 className="mt-6 font-display text-[40px] font-bold leading-tight tracking-tight md:text-[60px]">
-            Ready when <span className="text-yellow">you are.</span>
+            Ready when <span className="text-yellow">Businesses</span> are.
           </h2>
           <p className="mt-5 max-w-xl text-[15px] font-medium leading-relaxed text-paper/75">
             We approve most accounts inside 24 hours. Send us your trading name, companies house number, VAT number (if any), and the category of products you&rsquo;ll stock.
@@ -60,10 +60,10 @@ export default function TradePage() {
 
 function Benefit({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="rounded-2xl bg-paper p-8 ring-2 ring-ink/10 transition-all hover:ring-brand">
-      <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand">№ {n}</div>
-      <h3 className="mt-6 font-display text-[26px] font-bold leading-tight text-ink">{title}</h3>
-      <p className="mt-3 text-[14px] font-medium leading-relaxed text-ink-muted">{body}</p>
+    <div className="rounded-2xl bg-brand p-8 ring-2 ring-brand/20 transition-all hover:ring-yellow">
+      <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">№ {n}</div>
+      <h3 className="mt-6 font-display text-[26px] font-bold leading-tight text-paper">{title}</h3>
+      <p className="mt-3 text-[14px] font-medium leading-relaxed text-paper/75">{body}</p>
     </div>
   );
 }

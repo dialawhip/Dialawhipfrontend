@@ -38,7 +38,7 @@ export default async function MenuPage({ searchParams }: { searchParams: SP }) {
             </h1>
             <p className="max-w-sm text-[15px] leading-relaxed text-ink-soft">
               {activeCat?.description ??
-                "Cooked fresh each morning, packed with care, and delivered across Tyneside."}
+                "Cooked fresh each morning, packed with care, and delivered across the North East."}
             </p>
           </div>
         </div>

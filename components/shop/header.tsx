@@ -84,7 +84,7 @@ export function ShopHeader({
       {phone ? (
         <div className="hidden border-b-2 border-ink bg-yellow text-ink md:block">
           <div className="mx-auto flex h-9 max-w-[1280px] items-center justify-between px-6 text-[11px] font-bold uppercase tracking-[0.16em]">
-            <span>20-minute delivery · Tyneside · Tue–Sun</span>
+            <span>20-minute delivery · North East · Tue–Sun</span>
             <div className="flex items-center gap-5">
               <a href={`tel:${phone.replace(/\s+/g, "")}`} className="hover:underline">
                 ☎ {phone}
