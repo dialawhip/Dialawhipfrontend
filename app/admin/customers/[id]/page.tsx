@@ -6,6 +6,7 @@ import { Money } from "@/components/ui/money";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { DateTime } from "@/components/ui/datetime";
 import { Eyebrow } from "@/components/shop/eyebrow";
+import { CustomerDeleteButton } from "@/components/admin/customer-delete-button";
 
 type Params = Promise<{ id: string }>;
 
@@ -42,6 +43,15 @@ export default async function CustomerDetail({ params }: { params: Params }) {
               <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-ink-muted">Lifetime value</div>
               <div className="mt-1 font-display text-[26px] text-forest"><Money pence={data.lifetime_pence} /></div>
             </div>
+          </div>
+
+          <div className="mt-6 border-t hairline pt-5">
+            <CustomerDeleteButton
+              id={data.customer.id}
+              name={data.customer.name}
+              redirectTo="/admin/customers"
+              variant="button"
+            />
           </div>
         </aside>
 

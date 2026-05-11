@@ -2,6 +2,7 @@ import Link from "next/link";
 import { apiServer } from "@/lib/api-server";
 import type { User, Paginated } from "@/lib/types";
 import { Eyebrow } from "@/components/shop/eyebrow";
+import { CustomerDeleteButton } from "@/components/admin/customer-delete-button";
 
 type SP = Promise<{ cursor?: string; search?: string }>;
 
@@ -49,6 +50,7 @@ export default async function CustomersList({ searchParams }: { searchParams: SP
                 <th className="px-5 py-3.5">Name</th>
                 <th className="px-5 py-3.5">Email</th>
                 <th className="px-5 py-3.5">Phone</th>
+                <th className="px-5 py-3.5" />
               </tr>
             </thead>
             <tbody>
@@ -59,10 +61,13 @@ export default async function CustomersList({ searchParams }: { searchParams: SP
                   </td>
                   <td className="px-5 py-3.5 font-medium text-ink-muted">{c.email}</td>
                   <td className="px-5 py-3.5 font-medium text-ink-muted">{c.phone ?? "—"}</td>
+                  <td className="px-5 py-3.5 text-right">
+                    <CustomerDeleteButton id={c.id} name={c.name} />
+                  </td>
                 </tr>
               ))}
               {res.data.length === 0 ? (
-                <tr><td colSpan={3} className="px-5 py-12 text-center font-medium italic text-ink-muted">No customers found.</td></tr>
+                <tr><td colSpan={4} className="px-5 py-12 text-center font-medium italic text-ink-muted">No customers found.</td></tr>
               ) : null}
             </tbody>
           </table>
