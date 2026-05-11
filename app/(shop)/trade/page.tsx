@@ -32,10 +32,10 @@ export default function TradePage() {
           <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
             Open an account
           </div>
-          <h2 className="mt-6 font-display text-[40px] font-bold leading-tight tracking-tight md:text-[60px]">
+          <h2 className="mt-6 font-display text-[40px] font-bold leading-tight tracking-tight text-paper md:text-[60px]">
             Ready when <span className="text-yellow">Businesses</span> are.
           </h2>
-          <p className="mt-5 max-w-xl text-[15px] font-medium leading-relaxed text-paper/75">
+          <p className="mt-5 max-w-xl text-[15px] font-medium leading-relaxed text-paper/90">
             We approve most accounts inside 24 hours. Send us your trading name, companies house number, VAT number (if any), and the category of products you&rsquo;ll stock.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">

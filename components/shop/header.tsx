@@ -12,6 +12,7 @@ interface ShopLink {
   name: string;
   href: string;
   hot?: boolean;
+  sale?: boolean;
 }
 
 const FALLBACK_SHOP_LINKS: ShopLink[] = [
@@ -19,9 +20,11 @@ const FALLBACK_SHOP_LINKS: ShopLink[] = [
   { name: "Smartwhip tanks", href: "/shop/smartwhip-tanks", hot: true },
   { name: "MAXXI tanks", href: "/shop/maxxi-tanks" },
   { name: "Whippers", href: "/shop/whippers" },
+  { name: "Whip bundles", href: "/shop/whip-bundles", sale: true },
 ];
 
 const HOT_SLUGS = new Set(["cream-chargers", "smartwhip-tanks"]);
+const SALE_SLUGS = new Set(["whip-bundles"]);
 
 export function ShopHeader({
   user,
@@ -43,6 +46,7 @@ export function ShopHeader({
       name: c.name,
       href: `/shop/${c.slug}`,
       hot: HOT_SLUGS.has(c.slug),
+      sale: SALE_SLUGS.has(c.slug),
     }));
   }, [categories]);
 
@@ -143,6 +147,10 @@ export function ShopHeader({
                         {l.hot ? (
                           <span className="rounded-full bg-ink px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-yellow">
                             Hot
+                          </span>
+                        ) : l.sale ? (
+                          <span className="rounded-full bg-brand px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-yellow">
+                            Sale
                           </span>
                         ) : null}
                       </Link>
@@ -334,6 +342,8 @@ function MobileDrawer({
                   <span>{l.name}</span>
                   {l.hot ? (
                     <span className="rounded-full bg-ink px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-yellow">Hot</span>
+                  ) : l.sale ? (
+                    <span className="rounded-full bg-brand px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-yellow">Sale</span>
                   ) : null}
                 </DrawerLink>
               ))}
