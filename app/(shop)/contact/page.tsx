@@ -74,10 +74,10 @@ export default async function ContactPage() {
               <div className="inline-flex items-center gap-2 rounded-full bg-yellow px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-ink">
                 Trade &amp; events
               </div>
-              <h2 className="mt-6 font-display text-[40px] font-bold leading-[1] tracking-tight md:text-[60px]">
+              <h2 className="mt-6 font-display text-[40px] font-bold leading-[1] tracking-tight text-paper md:text-[60px]">
                 Something <span className="text-yellow">bigger</span> in mind?
               </h2>
-              <p className="mt-7 max-w-md text-[15px] font-medium leading-relaxed text-paper/75">
+              <p className="mt-7 max-w-md text-[15px] font-medium leading-relaxed text-paper/90">
                 Weddings, office events, private bars - we set up trade accounts with discounted pricing, account managers, and 24/7 ordering.
               </p>
             </div>

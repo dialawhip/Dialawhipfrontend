@@ -87,8 +87,8 @@
     letter-spacing: -0.02em;
   }
 
-  h1 { font-weight: 600; color: var(--color-ink); }
-  h2, h3 { font-weight: 500; color: var(--color-ink); }
+  h1 { font-weight: 600; color: inherit; }
+  h2, h3 { font-weight: 500; color: inherit; }
 
   a { text-underline-offset: 3px; }
 
