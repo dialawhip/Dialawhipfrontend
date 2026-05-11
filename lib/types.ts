@@ -38,6 +38,7 @@ export interface Category {
   slug: string;
   name: string;
   description?: string | null;
+  image_url?: string | null;
   sort_order: number;
   is_active: boolean;
 }

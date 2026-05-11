@@ -52,7 +52,14 @@ export function serializeAddress(a: Row | null | undefined) {
 
 export function serializeCategory(c: Row | null | undefined) {
   if (!c) return null;
-  return { id: c.id, name: c.name, slug: c.slug, sort_order: c.sort_order, is_active: !!c.is_active };
+  return {
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+    image_url: c.image_url ?? null,
+    sort_order: c.sort_order,
+    is_active: !!c.is_active,
+  };
 }
 
 export function serializeVariant(v: Row) {
