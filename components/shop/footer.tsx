@@ -176,7 +176,7 @@ export function ShopFooter({
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t-2 border-paper/10 pt-8 text-[12px] text-paper/55 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} {brandName} Ltd{city ? ` · ${city}` : ""}.</p>
+          <p>© {new Date().getFullYear()} North East Catering Supplies LTD{city ? ` · ${city}` : ""}.</p>
           {hours.length > 0 ? (
             <p className="flex flex-wrap gap-x-5 gap-y-1.5">
               {hours.map((h, idx) => (
