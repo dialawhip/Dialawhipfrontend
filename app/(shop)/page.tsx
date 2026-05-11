@@ -381,45 +381,45 @@ function Shelves({ categories }: { categories: Category[] }) {
         </Link>
       </div>
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((c, i) => {
           const blurb = c.description || SHELF_BLURB_FALLBACK[c.slug] || "Browse the full range.";
           return (
             <Link
               key={c.slug}
               href={`/shop/${c.slug}`}
-              className="group relative flex flex-col overflow-hidden rounded-2xl bg-brand ring-2 ring-brand/20 transition-all hover:ring-yellow"
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-paper shadow-sm ring-2 ring-ink/10 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-brand"
             >
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-brand-deep">
+              <div className="relative aspect-square w-full overflow-hidden bg-paper">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,79,176,0.04),transparent_60%)]" />
+                <span className="absolute left-4 top-4 z-10 inline-flex items-center rounded-full bg-brand px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-yellow">
+                  № {String(i + 1).padStart(2, "0")}
+                </span>
                 {c.image_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={c.image_url}
                     alt={c.name}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-yellow/60 font-display text-[48px] font-bold leading-none">
+                  <div className="absolute inset-0 flex items-center justify-center font-display text-[64px] font-bold leading-none text-brand/15">
                     {c.name.charAt(0)}
                   </div>
                 )}
               </div>
-              <div className="flex flex-1 flex-col p-7">
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">
-                  № {String(i + 1).padStart(2, "0")}
-                </div>
-                <h3 className="mt-4 font-display text-[22px] font-bold leading-tight text-paper transition-colors group-hover:text-yellow">
+              <div className="flex flex-1 flex-col border-t-2 border-ink/10 bg-paper p-5">
+                <h3 className="font-display text-[20px] font-bold leading-tight text-ink transition-colors group-hover:text-brand">
                   {c.name}
                 </h3>
-                <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-paper/75">
+                <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-ink-muted">
                   {blurb}
                 </p>
-                <div className="mt-6 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70 transition-colors group-hover:text-yellow">
+                <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-brand">
                   <span>Browse shelf</span>
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </div>
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-yellow opacity-0 transition-opacity group-hover:opacity-100" />
             </Link>
           );
         })}
