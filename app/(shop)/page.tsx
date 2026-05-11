@@ -348,13 +348,14 @@ const SHELF_BLURB_FALLBACK: Record<string, string> = {
 };
 
 function Shelves({ categories }: { categories: Category[] }) {
-  const items = (categories.length > 0
+  const items: Category[] = (categories.length > 0
     ? categories
     : Object.entries(SHELF_BLURB_FALLBACK).map(([slug, description], i) => ({
         id: slug,
         slug,
         name: slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase()),
         description,
+        image_url: null,
         sort_order: i,
         is_active: true,
       }))
