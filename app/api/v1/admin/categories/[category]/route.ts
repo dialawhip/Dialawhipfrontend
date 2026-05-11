@@ -9,6 +9,7 @@ import { serializeCategory } from "@/lib/api/resources";
 const Body = z.object({
   name: z.string().min(1).max(120).optional(),
   slug: z.string().min(1).max(120).regex(/^[a-z0-9-]+$/).optional(),
+  image_url: z.string().url().max(2048).nullable().optional(),
   sort_order: z.number().int().optional().nullable(),
   is_active: z.boolean().optional().nullable(),
 });
@@ -33,6 +34,7 @@ export const PATCH = handle(async (req: NextRequest, { params }: Ctx) => {
   const update: Record<string, unknown> = {};
   if (body.name !== undefined) update.name = body.name;
   if (body.slug !== undefined) update.slug = body.slug;
+  if (body.image_url !== undefined) update.image_url = body.image_url;
   if (body.sort_order !== undefined && body.sort_order !== null) update.sort_order = body.sort_order;
   if (body.is_active !== undefined && body.is_active !== null) update.is_active = body.is_active;
 

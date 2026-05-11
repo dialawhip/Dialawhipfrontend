@@ -9,6 +9,7 @@ import { serializeCategory } from "@/lib/api/resources";
 const Body = z.object({
   name: z.string().min(1).max(120),
   slug: z.string().min(1).max(120).regex(/^[a-z0-9-]+$/, "lowercase letters, numbers and hyphens only"),
+  image_url: z.string().url().max(2048).optional().nullable(),
   sort_order: z.number().int().optional().nullable(),
   is_active: z.boolean().optional().nullable(),
 });
@@ -35,6 +36,7 @@ export const POST = handle(async (req: NextRequest) => {
     .insert({
       name: body.name,
       slug: body.slug,
+      image_url: body.image_url ?? null,
       sort_order: body.sort_order ?? 0,
       is_active: body.is_active ?? true,
     })
