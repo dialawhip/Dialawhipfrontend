@@ -20,11 +20,11 @@ const FALLBACK_SHOP_LINKS: ShopLink[] = [
   { name: "Smartwhip tanks", href: "/shop/smartwhip-tanks", hot: true },
   { name: "MAXXI tanks", href: "/shop/maxxi-tanks" },
   { name: "Whippers", href: "/shop/whippers" },
-  { name: "Whip bundles", href: "/shop/whip-bundles", sale: true },
+  { name: "Whip bundles deals", href: "/shop/whip-bundles-deals", sale: true },
 ];
 
 const HOT_SLUGS = new Set(["cream-chargers", "smartwhip-tanks"]);
-const SALE_SLUGS = new Set(["whip-bundles"]);
+const SALE_SLUGS = new Set(["whip-bundles-deals", "whip-bundles"]);
 
 export function ShopHeader({
   user,
