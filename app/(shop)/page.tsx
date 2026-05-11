@@ -387,20 +387,36 @@ function Shelves({ categories }: { categories: Category[] }) {
             <Link
               key={c.slug}
               href={`/shop/${c.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-brand p-7 ring-2 ring-brand/20 transition-all hover:ring-yellow"
+              className="group relative flex flex-col overflow-hidden rounded-2xl bg-brand ring-2 ring-brand/20 transition-all hover:ring-yellow"
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">
-                № {String(i + 1).padStart(2, "0")}
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-brand-deep">
+                {c.image_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={c.image_url}
+                    alt={c.name}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-yellow/60 font-display text-[48px] font-bold leading-none">
+                    {c.name.charAt(0)}
+                  </div>
+                )}
               </div>
-              <h3 className="mt-6 font-display text-[22px] font-bold leading-tight text-paper transition-colors group-hover:text-yellow">
-                {c.name}
-              </h3>
-              <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-paper/75">
-                {blurb}
-              </p>
-              <div className="mt-7 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70 transition-colors group-hover:text-yellow">
-                <span>Browse shelf</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+              <div className="flex flex-1 flex-col p-7">
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow">
+                  № {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 className="mt-4 font-display text-[22px] font-bold leading-tight text-paper transition-colors group-hover:text-yellow">
+                  {c.name}
+                </h3>
+                <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-paper/75">
+                  {blurb}
+                </p>
+                <div className="mt-6 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-paper/70 transition-colors group-hover:text-yellow">
+                  <span>Browse shelf</span>
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </div>
               </div>
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-yellow opacity-0 transition-opacity group-hover:opacity-100" />
             </Link>
