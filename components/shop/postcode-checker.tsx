@@ -13,7 +13,9 @@ type Result =
 const COVERED_PREFIXES = [
   "NE1", "NE2", "NE3", "NE4", "NE5", "NE6", "NE7", "NE8", "NE9", "NE10",
   "NE11", "NE12", "NE13", "NE15", "NE16", "NE20", "NE25", "NE26", "NE27",
-  "NE28", "NE29", "NE30",
+  "NE28", "NE29", "NE30", "NE31", "NE32", "NE33", "NE34",
+  "SR1", "SR2", "SR3", "SR4", "SR5", "SR6",
+  "DH1", "DH2", "DH3", "DH4", "DH5", "DH6", "DH7", "DH8", "DH9",
 ];
 
 const UK_POSTCODE = /^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$/i;
@@ -63,7 +65,7 @@ export function PostcodeChecker({ tone = "card" }: { tone?: "card" | "plain" }) 
         Can we reach you in 20 minutes?
       </h2>
       <p className="mt-1 text-[12px] text-ink-muted">
-        Enter your postcode for a live ETA across Tyneside.
+        Enter your postcode for a live ETA across the North East.
       </p>
 
       <form onSubmit={onCheck} className="mt-4 flex gap-2">
@@ -87,7 +89,7 @@ export function PostcodeChecker({ tone = "card" }: { tone?: "card" | "plain" }) 
       <div className="mt-3 min-h-[40px]">
         {result.state === "idle" && (
           <p className="text-[12px] text-ink-muted">
-            Covering Newcastle, Gateshead, North &amp; South Tyneside.
+            Covering Newcastle, Gateshead, Sunderland, Durham &amp; the wider North East.
           </p>
         )}
         {result.state === "checking" && (

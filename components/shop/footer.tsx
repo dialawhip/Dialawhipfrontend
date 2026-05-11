@@ -80,7 +80,7 @@ export function ShopFooter({
               ) : null}
             </div>
             <p className="mt-6 max-w-sm text-[14px] leading-relaxed text-paper/65">
-              Rapid catering supplies across Tyneside — chargers, whippers, syrups,
+              Rapid catering supplies across the North East — chargers, whippers, syrups,
               coffee and disposables, at your door in minutes. Strictly trade &amp; 18+.
             </p>
 

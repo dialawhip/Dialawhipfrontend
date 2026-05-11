@@ -12,10 +12,10 @@ export default function ShippingPage() {
     >
       <Heading>Coverage</Heading>
       <p>
-        We deliver within a 20-mile radius of Newcastle upon Tyne city
-        centre — broadly NE1 through NE30, including Gateshead, North
-        Tyneside, South Tyneside and Whitley Bay. Enter your postcode on the
-        homepage for a live ETA.
+        We deliver across the North East from our Newcastle base — broadly
+        NE1–NE34, SR1–SR6 and DH1–DH9, covering Gateshead, South Shields,
+        Sunderland, Durham, Whitley Bay and the surrounding towns. Enter your
+        postcode on the homepage for a live ETA.
       </p>
 
       <Heading>Delivery tiers</Heading>
@@ -30,7 +30,7 @@ export default function ShippingPage() {
 
       <Heading>Cutoff times</Heading>
       <p>
-        We operate 7 days a week, 18:00 until 06:00. Orders placed within operating hours are dispatched
+        We operate 7 days a week, 18:00 until 06:00 AM. Orders placed within operating hours are dispatched
         immediately; outside of hours, orders are queued for the next morning.
       </p>
 
