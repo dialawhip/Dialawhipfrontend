@@ -47,6 +47,7 @@ export interface ProductVariant {
   id: string;
   label: string;
   price_pence: number;
+  sale_price_pence: number | null;
   qty_multiplier: number;
   stock_count: number | null;
   sku: string | null;
@@ -62,6 +63,7 @@ export interface Product {
   brand?: string | null;
   description: string | null;
   price_pence: number;
+  sale_price_pence: number | null;
   image_url: string | null;
   /** Additional gallery images (public URLs). The product page shows these as thumbnails. */
   gallery_urls?: string[];
@@ -113,6 +115,8 @@ export interface OrderPayment {
   receipt_url: string | null;
   stripe_session_id: string | null;
   stripe_payment_intent_id: string | null;
+  stripe_charge_id: string | null;
+  stripe_balance_transaction_id: string | null;
   refund_id: string | null;
   refunded_at: string | null;
   amount_refunded_pence: number | null;

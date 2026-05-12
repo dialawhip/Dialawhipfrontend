@@ -1,5 +1,6 @@
 import type { DeliveryTier } from "../types";
 import { supabaseAdmin } from "../supabase/admin";
+import { effectivePricePence } from "../sale-price";
 import { getSetting } from "./settings";
 import { findServiceAreaForPostcode } from "./service-area";
 import { ShopClosedError, BelowMinimumOrderError, PostcodeOutOfAreaError } from "./errors";
@@ -13,10 +14,12 @@ export interface CartItem {
 }
 
 export interface PricedLine {
-  product: { id: string; name: string; brand: string | null; slug: string; price_pence: number; image_url: string | null; gallery_urls: string[] | null; is_age_restricted: boolean };
-  variant: { id: string; label: string; price_pence: number; qty_multiplier: number; sku: string | null } | null;
+  product: { id: string; name: string; brand: string | null; slug: string; price_pence: number; sale_price_pence: number | null; image_url: string | null; gallery_urls: string[] | null; is_age_restricted: boolean };
+  variant: { id: string; label: string; price_pence: number; sale_price_pence: number | null; qty_multiplier: number; sku: string | null } | null;
   quantity: number;
   unit_price_pence: number;
+  /** The "before sale" price for this line, for display only. Equals unit_price_pence when not on sale. */
+  list_price_pence: number;
   line_total_pence: number;
   options: Record<string, unknown> | null;
   statement_category: string | null;
@@ -72,13 +75,24 @@ export async function priceCart(
   for (const item of items) {
     const p = productMap.get(item.product_id);
     if (!p || !p.is_active || p.deleted_at) throw new Error(`Product unavailable: ${item.product_id}`);
-    let unitPrice = Number(p.price_pence);
+    const productSale = typeof p.sale_price_pence === "number" ? Number(p.sale_price_pence) : null;
+    let listPrice = Number(p.price_pence);
+    let unitPrice = effectivePricePence({ price_pence: listPrice, sale_price_pence: productSale });
     let variant: PricedLine["variant"] = null;
     if (item.variant_id) {
       const v = variantMap.get(item.variant_id);
       if (!v || !v.is_active || v.product_id !== p.id) throw new Error(`Variant unavailable`);
-      unitPrice = Number(v.price_pence);
-      variant = { id: v.id, label: v.label, price_pence: v.price_pence, qty_multiplier: v.qty_multiplier, sku: v.sku ?? null };
+      const variantSale = typeof v.sale_price_pence === "number" ? Number(v.sale_price_pence) : null;
+      listPrice = Number(v.price_pence);
+      unitPrice = effectivePricePence({ price_pence: listPrice, sale_price_pence: variantSale });
+      variant = {
+        id: v.id,
+        label: v.label,
+        price_pence: v.price_pence,
+        sale_price_pence: variantSale,
+        qty_multiplier: v.qty_multiplier,
+        sku: v.sku ?? null,
+      };
     }
     const qty = Math.max(1, Math.min(500, Math.trunc(item.quantity)));
     const lineTotal = unitPrice * qty;
@@ -87,12 +101,15 @@ export async function priceCart(
     lines.push({
       product: {
         id: p.id, name: p.name, brand: p.brand ?? null, slug: p.slug,
-        price_pence: p.price_pence, image_url: p.image_url ?? null,
+        price_pence: p.price_pence,
+        sale_price_pence: productSale,
+        image_url: p.image_url ?? null,
         gallery_urls: p.gallery_urls ?? null, is_age_restricted: !!p.is_age_restricted,
       },
       variant,
       quantity: qty,
       unit_price_pence: unitPrice,
+      list_price_pence: listPrice,
       line_total_pence: lineTotal,
       options: item.options ?? null,
       statement_category: item.statement_category ?? null,

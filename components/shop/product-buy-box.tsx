@@ -6,6 +6,7 @@ import { Minus, Plus } from "lucide-react";
 import { Money } from "@/components/ui/money";
 import type { Product, ProductVariant } from "@/lib/types";
 import { cn } from "@/lib/cn";
+import { effectivePricePence, isOnSale } from "@/lib/sale-price";
 
 type BaseItem = Omit<CartItem, "quantity" | "variant_id" | "variant_label" | "unit_price_pence" | "statement_category">;
 
@@ -35,7 +36,10 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
   const add = useCart((s) => s.add);
 
   const selected = selectedId ? variants.find((v) => v.id === selectedId) ?? null : null;
-  const unitPrice = selected ? selected.price_pence : product.price_pence;
+  const sourcePriceable = selected ?? product;
+  const listPrice = sourcePriceable.price_pence;
+  const unitPrice = effectivePricePence(sourcePriceable);
+  const onSale = isOnSale(sourcePriceable);
   const lineTotal = unitPrice * qty;
 
   function onAdd() {
@@ -96,7 +100,16 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
                       </div>
                     </div>
                   </div>
-                  <Money pence={v.price_pence} className="text-[18px] font-extrabold text-ink" />
+                  <div className="flex items-baseline gap-2">
+                    {isOnSale(v) ? (
+                      <>
+                        <Money pence={v.sale_price_pence as number} className="text-[18px] font-extrabold text-[#c10b0b]" />
+                        <Money pence={v.price_pence} className="text-[12px] text-ink-muted line-through decoration-ink-muted/60" />
+                      </>
+                    ) : (
+                      <Money pence={v.price_pence} className="text-[18px] font-extrabold text-ink" />
+                    )}
+                  </div>
                 </button>
               );
             })}
@@ -176,7 +189,14 @@ export function ProductBuyBox({ product, base }: { product: Product; base: BaseI
             <>
               <span className="truncate">Add {qty} to bag</span>
               <span className="opacity-70">·</span>
-              <span className="font-extrabold">£{(lineTotal / 100).toFixed(2)}</span>
+              {onSale ? (
+                <span className="flex items-baseline gap-1.5">
+                  <span className="font-extrabold">£{(lineTotal / 100).toFixed(2)}</span>
+                  <span className="text-[11px] text-paper/60 line-through">£{((listPrice * qty) / 100).toFixed(2)}</span>
+                </span>
+              ) : (
+                <span className="font-extrabold">£{(lineTotal / 100).toFixed(2)}</span>
+              )}
             </>
           )}
         </button>

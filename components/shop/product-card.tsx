@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { Money } from "@/components/ui/money";
+import { leadPrice, discountPercent } from "@/lib/sale-price";
 
 function specHighlight(spec: Product["short_spec"]): string | null {
   if (!spec) return null;
@@ -17,6 +18,9 @@ function specHighlight(spec: Product["short_spec"]): string | null {
 export function ProductCard({ product }: { product: Product; index?: number }) {
   const highlight = specHighlight(product.short_spec);
   const lowStock = typeof product.stock_count === "number" && product.stock_count > 0 && product.stock_count < 10;
+  const { regular, sale } = leadPrice(product);
+  const onSale = sale !== null;
+  const off = onSale ? discountPercent({ price_pence: regular, sale_price_pence: sale }) : 0;
 
   return (
     <Link
@@ -26,6 +30,11 @@ export function ProductCard({ product }: { product: Product; index?: number }) {
       <div className="relative aspect-[4/3] bg-yellow">
         {/* badges */}
         <div className="absolute left-3 top-3 z-10 flex gap-1.5">
+          {onSale ? (
+            <span className="inline-flex h-6 items-center rounded bg-[#c10b0b] px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
+              {off > 0 ? `-${off}%` : "Sale"}
+            </span>
+          ) : null}
           {product.is_age_restricted ? (
             <span className="inline-flex h-6 items-center rounded bg-ink px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-yellow">
               18+ ID
@@ -75,7 +84,18 @@ export function ProductCard({ product }: { product: Product; index?: number }) {
         ) : null}
 
         <div className="mt-5 flex items-center justify-between">
-          <Money pence={product.price_pence} className="font-display text-[20px] font-bold text-ink" />
+          <div className="flex items-baseline gap-2">
+            <Money
+              pence={onSale ? (sale as number) : regular}
+              className={`font-display text-[20px] font-bold ${onSale ? "text-[#c10b0b]" : "text-ink"}`}
+            />
+            {onSale ? (
+              <Money
+                pence={regular}
+                className="font-medium text-[13px] text-ink-muted line-through decoration-ink-muted/60"
+              />
+            ) : null}
+          </div>
           <span className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink px-4 text-[11px] font-bold text-paper transition-colors group-hover:bg-brand">
             Add <span aria-hidden>+</span>
           </span>

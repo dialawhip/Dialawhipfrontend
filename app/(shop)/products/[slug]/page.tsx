@@ -7,6 +7,7 @@ import { ProductBuyBox } from "@/components/shop/product-buy-box";
 import { ProductGallery } from "@/components/shop/product-gallery";
 import { Eyebrow } from "@/components/shop/eyebrow";
 import { ProductTabs } from "@/components/shop/product-tabs";
+import { leadPrice } from "@/lib/sale-price";
 
 type Params = Promise<{ slug: string }>;
 
@@ -126,17 +127,33 @@ export default async function ProductPage({ params }: { params: Params }) {
           </h1>
 
           <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:mt-6">
-            {product.variants && product.variants.length > 0 ? (
-              <>
-                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-muted sm:text-[12px]">from</span>
-                <Money
-                  pence={Math.min(...product.variants.filter((v) => v.is_active).map((v) => v.price_pence))}
-                  className="font-display text-[34px] font-bold leading-none text-ink sm:text-[40px]"
-                />
-              </>
-            ) : (
-              <Money pence={product.price_pence} className="font-display text-[36px] font-bold leading-none text-ink sm:text-[44px]" />
-            )}
+            {(() => {
+              const { regular: lead, sale: leadSale } = leadPrice(product);
+              const headlineFrom = !!product.variants && product.variants.filter((v) => v.is_active).length > 0;
+              const onSale = leadSale !== null;
+              return (
+                <>
+                  {headlineFrom ? (
+                    <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-muted sm:text-[12px]">from</span>
+                  ) : null}
+                  <Money
+                    pence={onSale ? (leadSale as number) : lead}
+                    className={`font-display ${headlineFrom ? "text-[34px] sm:text-[40px]" : "text-[36px] sm:text-[44px]"} font-bold leading-none ${onSale ? "text-[#c10b0b]" : "text-ink"}`}
+                  />
+                  {onSale ? (
+                    <Money
+                      pence={lead}
+                      className="font-display text-[18px] text-ink-muted line-through decoration-ink-muted/60"
+                    />
+                  ) : null}
+                  {onSale ? (
+                    <span className="inline-flex h-7 items-center rounded-full bg-[#c10b0b] px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
+                      Sale
+                    </span>
+                  ) : null}
+                </>
+              );
+            })()}
             {lowStock ? (
               <span className="inline-flex h-7 items-center rounded-full bg-yellow px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-ink ring-2 ring-ink">
                 Only {product.stock_count} left

@@ -1,9 +1,11 @@
 import type { DeliveryTier } from "../types";
 import { supabaseAdmin } from "../supabase/admin";
-import { priceCart, type CartItem } from "./pricing";
+import { priceCart, type CartItem, type PriceResult } from "./pricing";
 import { recordInitialEvent } from "./order-status";
 import { getSetting } from "./settings";
 import { sendEmail } from "../email";
+import { renderAdminOrderEmail } from "./admin-order-email";
+import { getPublicSettings, settingString } from "../settings";
 
 export interface CreateOrderInput {
   customerId: string;
@@ -88,41 +90,67 @@ export async function createOrderFromCart(input: CreateOrderInput) {
 
   // Best-effort admin notification. Failure must not break order creation —
   // the order is already committed.
-  notifyAdminOfOrder(order.id, reference, priced.total_pence, input.customerEmail).catch((e) => {
+  notifyAdminOfOrder({
+    orderId: order.id,
+    reference,
+    customerEmail: input.customerEmail,
+    deliveryTier: input.deliveryTier,
+    scheduledFor: input.scheduledFor,
+    customerNotes: input.customerNotes,
+    address: {
+      line1: address.line1 as string,
+      line2: (address.line2 ?? null) as string | null,
+      city: (address.city ?? null) as string | null,
+      postcode: address.postcode as string,
+    },
+    priced,
+  }).catch((e) => {
     console.error("[create-order] admin notify failed", e);
   });
 
   return order;
 }
 
-async function notifyAdminOfOrder(
-  orderId: string,
-  reference: string,
-  totalPence: number,
-  customerEmail: string,
-) {
+interface NotifyArgs {
+  orderId: string;
+  reference: string;
+  customerEmail: string;
+  deliveryTier: DeliveryTier;
+  scheduledFor: string | null;
+  customerNotes: string | null;
+  address: { line1: string; line2: string | null; city: string | null; postcode: string };
+  priced: PriceResult;
+}
+
+async function notifyAdminOfOrder(args: NotifyArgs) {
   const adminEmail = await getSetting<string | null>("notifications.admin_email", null);
   if (!adminEmail) return;
-  const total = (totalPence / 100).toLocaleString("en-GB", { style: "currency", currency: "GBP" });
   const base = process.env.FRONTEND_URL?.replace(/\/$/, "") || "";
-  const link = base ? `${base}/admin/orders/${orderId}` : `Order ID: ${orderId}`;
-  await sendEmail({
-    to: adminEmail,
-    subject: `New order ${reference} · ${total}`,
-    text: `A new order has been placed.
+  const settings = await getPublicSettings();
+  const brandName = settingString(settings, "business.name", "Dial A Whip");
+  const brandColor = settingString(settings, "branding.primary_color", "#0b1d3a");
+  const accentColor = settingString(settings, "branding.accent_color", "#f5eb12");
 
-Reference: ${reference}
-Total:     ${total}
-Customer:  ${customerEmail}
-
-View: ${link}
-`,
-    html: `<p>A new order has been placed.</p>
-<table cellpadding="6" style="border-collapse:collapse">
-  <tr><td><strong>Reference</strong></td><td>${reference}</td></tr>
-  <tr><td><strong>Total</strong></td><td>${total}</td></tr>
-  <tr><td><strong>Customer</strong></td><td>${customerEmail}</td></tr>
-</table>
-${base ? `<p><a href="${link}">View in admin →</a></p>` : ""}`,
+  const { subject, html, text } = renderAdminOrderEmail({
+    orderId: args.orderId,
+    reference: args.reference,
+    placedAt: new Date(),
+    customerEmail: args.customerEmail,
+    deliveryTier: args.deliveryTier,
+    scheduledFor: args.scheduledFor,
+    customerNotes: args.customerNotes,
+    address: args.address,
+    lines: args.priced.lines,
+    subtotalPence: args.priced.subtotal_pence,
+    deliveryFeePence: args.priced.delivery_fee_pence,
+    vatPence: args.priced.vat_pence,
+    totalPence: args.priced.total_pence,
+    brandName,
+    brandColor,
+    accentColor,
+    adminLink: base ? `${base}/admin/orders/${args.orderId}` : null,
+    requiresIdVerification: args.priced.requires_id_verification,
   });
+
+  await sendEmail({ to: adminEmail, subject, text, html });
 }

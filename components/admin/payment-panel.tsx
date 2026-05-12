@@ -146,6 +146,8 @@ export function PaymentPanel({
       <div className="space-y-2.5 px-6 py-5 text-[12px]">
         <IdRow label="Stripe session" value={payment.stripe_session_id} onCopy={copy} copied={copied === "session"} copyKey="session" />
         <IdRow label="Payment intent" value={payment.stripe_payment_intent_id} onCopy={copy} copied={copied === "pi"} copyKey="pi" />
+        <IdRow label="Charge" value={payment.stripe_charge_id} onCopy={copy} copied={copied === "charge"} copyKey="charge" />
+        <IdRow label="Transaction" value={payment.stripe_balance_transaction_id} onCopy={copy} copied={copied === "txn"} copyKey="txn" />
         {payment.refund_id ? (
           <IdRow label="Refund" value={payment.refund_id} onCopy={copy} copied={copied === "refund"} copyKey="refund" />
         ) : null}
