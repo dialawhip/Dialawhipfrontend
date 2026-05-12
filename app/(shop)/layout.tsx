@@ -1,6 +1,7 @@
 import { ShopHeader } from "@/components/shop/header";
 import { ShopFooter } from "@/components/shop/footer";
 import { ShopClosedBanner } from "@/components/shop/shop-closed-banner";
+import { NavigationProgress } from "@/components/shop/navigation-progress";
 import { apiServer, getCurrentUser } from "@/lib/api-server";
 import { getPublicSettings, settingBool, settingString } from "@/lib/settings";
 import type { Category } from "@/lib/types";
@@ -35,6 +36,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
   return (
     <>
+      <NavigationProgress />
       <div className="bg-ink text-paper">
         <div className="mx-auto flex max-w-[1280px] items-center justify-center gap-2 px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.14em] sm:text-[12px]">
           <span className="text-yellow">Open from 6pm</span>

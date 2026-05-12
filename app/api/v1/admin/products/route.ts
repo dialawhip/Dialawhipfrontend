@@ -10,11 +10,15 @@ const VariantSchema = z.object({
   id: z.string().uuid().optional().nullable(),
   label: z.string().min(1).max(120),
   price_pence: z.number().int().min(0).max(10_000_000),
+  sale_price_pence: z.number().int().min(0).max(10_000_000).optional().nullable(),
   qty_multiplier: z.number().int().min(1).max(1000).optional().nullable(),
   stock_count: z.number().int().min(0).optional().nullable(),
   sku: z.string().max(80).optional().nullable(),
   sort_order: z.number().int().optional().nullable(),
   is_active: z.boolean().optional().nullable(),
+}).refine((v) => v.sale_price_pence == null || v.sale_price_pence < v.price_pence, {
+  message: "Sale price must be lower than the regular price.",
+  path: ["sale_price_pence"],
 });
 
 const ProductBody = z.object({
@@ -24,6 +28,7 @@ const ProductBody = z.object({
   brand: z.string().max(80).optional().nullable(),
   description: z.string().optional().nullable(),
   price_pence: z.number().int().min(0).max(1_000_000),
+  sale_price_pence: z.number().int().min(0).max(1_000_000).optional().nullable(),
   image_url: z.string().url().optional().nullable(),
   gallery_urls: z.array(z.string().max(1024)).max(20).optional().nullable(),
   options: z.unknown().optional().nullable(),
@@ -35,6 +40,9 @@ const ProductBody = z.object({
   available_until: z.string().regex(/^\d{2}:\d{2}$/).optional().nullable(),
   stock_count: z.number().int().min(0).optional().nullable(),
   variants: z.array(VariantSchema).max(50).optional().nullable(),
+}).refine((p) => p.sale_price_pence == null || p.sale_price_pence < p.price_pence, {
+  message: "Sale price must be lower than the regular price.",
+  path: ["sale_price_pence"],
 });
 
 function isMissingFeaturedColumn(error: { message?: string; code?: string } | null) {
@@ -120,6 +128,7 @@ export const POST = handle(async (req: NextRequest) => {
     brand: body.brand ?? null,
     description: body.description ?? null,
     price_pence: body.price_pence,
+    sale_price_pence: body.sale_price_pence ?? null,
     image_url: body.image_url ?? null,
     gallery_urls: body.gallery_urls ?? null,
     options_json: productOptions(body.options),
@@ -160,6 +169,7 @@ export const POST = handle(async (req: NextRequest) => {
       product_id: product.id,
       label: v.label,
       price_pence: v.price_pence,
+      sale_price_pence: v.sale_price_pence ?? null,
       qty_multiplier: v.qty_multiplier ?? 1,
       stock_count: v.stock_count ?? null,
       sku: v.sku ?? null,

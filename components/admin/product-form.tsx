@@ -16,6 +16,7 @@ type VariantDraft = {
   id?: string;
   label: string;
   price_pounds: string;         // UX in pounds; converted to pence on submit
+  sale_price_pounds: string;    // Optional sale price in pounds
   qty_multiplier: string;
   stock_count: string;
   sku: string;
@@ -27,6 +28,8 @@ function toDraft(v: ProductVariant): VariantDraft {
     id: v.id,
     label: v.label,
     price_pounds: (v.price_pence / 100).toFixed(2),
+    sale_price_pounds:
+      typeof v.sale_price_pence === "number" ? (v.sale_price_pence / 100).toFixed(2) : "",
     qty_multiplier: String(v.qty_multiplier),
     stock_count: v.stock_count !== null && v.stock_count !== undefined ? String(v.stock_count) : "",
     sku: v.sku ?? "",
@@ -37,6 +40,7 @@ function toDraft(v: ProductVariant): VariantDraft {
 const EMPTY_VARIANT: VariantDraft = {
   label: "",
   price_pounds: "",
+  sale_price_pounds: "",
   qty_multiplier: "1",
   stock_count: "",
   sku: "",
@@ -59,6 +63,10 @@ export function ProductForm({ product, categories }: { product?: Product; catego
     category_id: product?.category_id ?? categories[0]?.id ?? "",
     description: product?.description ?? "",
     price_pence: product ? String(product.price_pence) : "",
+    sale_price_pence:
+      product && typeof product.sale_price_pence === "number"
+        ? String(product.sale_price_pence)
+        : "",
     is_active: product?.is_active ?? true,
     is_featured: product?.is_featured ?? false,
   });
@@ -90,6 +98,7 @@ export function ProductForm({ product, categories }: { product?: Product; catego
       const body: Record<string, unknown> = {
         ...form,
         price_pence: Number(form.price_pence || 0),
+        sale_price_pence: form.sale_price_pence === "" ? null : Number(form.sale_price_pence),
         image_url: featuredImage || null,
         gallery_urls: galleryImages,
         options: product?.options ?? null,
@@ -99,6 +108,8 @@ export function ProductForm({ product, categories }: { product?: Product; catego
           id: v.id,
           label: v.label,
           price_pence: Math.round(Number(v.price_pounds || 0) * 100),
+          sale_price_pence:
+            v.sale_price_pounds === "" ? null : Math.round(Number(v.sale_price_pounds || 0) * 100),
           qty_multiplier: Number(v.qty_multiplier || 1),
           stock_count: v.stock_count === "" ? null : Number(v.stock_count),
           sku: v.sku || null,
@@ -172,7 +183,7 @@ export function ProductForm({ product, categories }: { product?: Product; catego
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <Label>Category</Label>
           <select
@@ -206,6 +217,38 @@ export function ProductForm({ product, categories }: { product?: Product; catego
           </div>
           <div className="text-[10px] uppercase tracking-[0.14em] text-ink-muted">Used when no variant is selected.</div>
           <FieldError>{errors.price_pence?.[0]}</FieldError>
+        </div>
+        <div className="space-y-1.5">
+          <Label>
+            Sale price <span className="font-normal text-ink-muted">(optional)</span>
+          </Label>
+          <div className="relative">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[14px] text-ink-muted">£</span>
+            <Input
+              type="number"
+              min="0"
+              step="0.01"
+              inputMode="decimal"
+              className="pl-7"
+              placeholder="—"
+              value={
+                form.sale_price_pence === ""
+                  ? ""
+                  : (Number(form.sale_price_pence) / 100).toFixed(2)
+              }
+              onChange={(e) => {
+                const raw = e.target.value;
+                if (raw === "") return setForm({ ...form, sale_price_pence: "" });
+                const n = Number(raw);
+                if (Number.isNaN(n)) return;
+                setForm({ ...form, sale_price_pence: String(Math.round(n * 100)) });
+              }}
+            />
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.14em] text-ink-muted">
+            Must be lower than base price. Leave blank to remove sale.
+          </div>
+          <FieldError>{errors.sale_price_pence?.[0]}</FieldError>
         </div>
       </div>
 
@@ -271,7 +314,7 @@ export function ProductForm({ product, categories }: { product?: Product; catego
             {variants.map((v, idx) => (
               <div key={v.id ?? `new-${idx}`} className="rounded-md border hairline bg-paper p-4">
                 <div className="grid gap-3 md:grid-cols-12">
-                  <div className="md:col-span-4 space-y-1">
+                  <div className="md:col-span-3 space-y-1">
                     <Label>Label</Label>
                     <Input
                       placeholder="2 tanks for £80"
@@ -295,6 +338,18 @@ export function ProductForm({ product, categories }: { product?: Product; catego
                     <FieldError>{errors[`variants.${idx}.price_pence`]?.[0]}</FieldError>
                   </div>
                   <div className="md:col-span-2 space-y-1">
+                    <Label>Sale (£)</Label>
+                    <Input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      placeholder="—"
+                      value={v.sale_price_pounds}
+                      onChange={(e) => updateVariant(idx, { sale_price_pounds: e.target.value })}
+                    />
+                    <FieldError>{errors[`variants.${idx}.sale_price_pence`]?.[0]}</FieldError>
+                  </div>
+                  <div className="md:col-span-1 space-y-1">
                     <Label>Units</Label>
                     <Input
                       type="number"

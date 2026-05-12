@@ -47,6 +47,7 @@ export interface ProductVariant {
   id: string;
   label: string;
   price_pence: number;
+  sale_price_pence: number | null;
   qty_multiplier: number;
   stock_count: number | null;
   sku: string | null;
@@ -62,6 +63,7 @@ export interface Product {
   brand?: string | null;
   description: string | null;
   price_pence: number;
+  sale_price_pence: number | null;
   image_url: string | null;
   /** Additional gallery images (public URLs). The product page shows these as thumbnails. */
   gallery_urls?: string[];
