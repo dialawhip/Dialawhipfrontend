@@ -90,15 +90,21 @@ export async function syncPaymentToOrder(orderId: string) {
 
   const s = stripe();
   let intent: Stripe.PaymentIntent | null = null;
+  const intentExpand = [
+    "latest_charge",
+    "latest_charge.balance_transaction",
+    "latest_charge.payment_method_details",
+    "latest_charge.refunds",
+  ];
   if (order.stripe_payment_intent_id) {
     intent = await s.paymentIntents.retrieve(order.stripe_payment_intent_id, {
-      expand: ["latest_charge", "latest_charge.payment_method_details", "latest_charge.refunds"],
+      expand: intentExpand,
     });
   } else if (order.stripe_session_id) {
     const session = await s.checkout.sessions.retrieve(order.stripe_session_id, { expand: ["payment_intent"] });
     if (session.payment_intent && typeof session.payment_intent !== "string") {
       const pi = await s.paymentIntents.retrieve(session.payment_intent.id, {
-        expand: ["latest_charge", "latest_charge.payment_method_details", "latest_charge.refunds"],
+        expand: intentExpand,
       });
       intent = pi;
       await admin.from("orders").update({ stripe_payment_intent_id: pi.id }).eq("id", orderId);
@@ -121,6 +127,11 @@ export async function syncPaymentToOrder(orderId: string) {
     }
     updates.payment_method_type = pm?.type ?? null;
     updates.receipt_url = charge.receipt_url ?? null;
+    updates.stripe_charge_id = charge.id;
+    const balanceTxn = charge.balance_transaction;
+    if (balanceTxn) {
+      updates.stripe_balance_transaction_id = typeof balanceTxn === "string" ? balanceTxn : balanceTxn.id;
+    }
     const refunds = charge.refunds?.data ?? [];
     if (refunds.length > 0) {
       const last = refunds[refunds.length - 1];

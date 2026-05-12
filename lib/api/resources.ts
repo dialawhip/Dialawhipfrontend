@@ -172,6 +172,8 @@ export function serializeOrder(o: Row & {
       receipt_url: o.receipt_url ?? null,
       stripe_session_id: o.stripe_session_id ?? null,
       stripe_payment_intent_id: o.stripe_payment_intent_id ?? null,
+      stripe_charge_id: o.stripe_charge_id ?? null,
+      stripe_balance_transaction_id: o.stripe_balance_transaction_id ?? null,
       refund_id: o.refund_id ?? null,
       refunded_at: o.refunded_at ?? null,
       amount_refunded_pence: o.amount_refunded_pence ?? null,

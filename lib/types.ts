@@ -113,6 +113,8 @@ export interface OrderPayment {
   receipt_url: string | null;
   stripe_session_id: string | null;
   stripe_payment_intent_id: string | null;
+  stripe_charge_id: string | null;
+  stripe_balance_transaction_id: string | null;
   refund_id: string | null;
   refunded_at: string | null;
   amount_refunded_pence: number | null;

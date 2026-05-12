@@ -187,6 +187,8 @@ create table if not exists public.orders (
   driver_notes text,
   stripe_session_id text,
   stripe_payment_intent_id text,
+  stripe_charge_id text,
+  stripe_balance_transaction_id text,
   paid_at timestamptz,
   amount_paid_pence integer,
   payment_currency text,
@@ -204,6 +206,8 @@ create index if not exists orders_customer_idx on public.orders(customer_id, cre
 create index if not exists orders_status_idx on public.orders(status, created_at desc);
 create index if not exists orders_driver_idx on public.orders(assigned_driver_id, status);
 create index if not exists orders_stripe_session_idx on public.orders(stripe_session_id);
+create index if not exists orders_stripe_charge_idx on public.orders(stripe_charge_id);
+create index if not exists orders_stripe_balance_txn_idx on public.orders(stripe_balance_transaction_id);
 create index if not exists orders_tier_status_idx on public.orders(delivery_tier, status);
 
 -- ============================================================================
