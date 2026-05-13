@@ -62,10 +62,10 @@ export function ProductForm({ product, categories }: { product?: Product; catego
     slug: product?.slug ?? "",
     category_id: product?.category_id ?? categories[0]?.id ?? "",
     description: product?.description ?? "",
-    price_pence: product ? String(product.price_pence) : "",
-    sale_price_pence:
+    price_pounds: product ? (product.price_pence / 100).toFixed(2) : "",
+    sale_price_pounds:
       product && typeof product.sale_price_pence === "number"
-        ? String(product.sale_price_pence)
+        ? (product.sale_price_pence / 100).toFixed(2)
         : "",
     is_active: product?.is_active ?? true,
     is_featured: product?.is_featured ?? false,
@@ -95,10 +95,12 @@ export function ProductForm({ product, categories }: { product?: Product; catego
     setErrors({});
     setPending(true);
     try {
+      const { price_pounds, sale_price_pounds, ...rest } = form;
       const body: Record<string, unknown> = {
-        ...form,
-        price_pence: Number(form.price_pence || 0),
-        sale_price_pence: form.sale_price_pence === "" ? null : Number(form.sale_price_pence),
+        ...rest,
+        price_pence: Math.round(Number(price_pounds || 0) * 100),
+        sale_price_pence:
+          sale_price_pounds === "" ? null : Math.round(Number(sale_price_pounds) * 100),
         image_url: featuredImage || null,
         gallery_urls: galleryImages,
         options: product?.options ?? null,
@@ -205,14 +207,8 @@ export function ProductForm({ product, categories }: { product?: Product; catego
               inputMode="decimal"
               className="pl-7"
               required
-              value={form.price_pence === "" ? "" : (Number(form.price_pence) / 100).toFixed(2)}
-              onChange={(e) => {
-                const raw = e.target.value;
-                if (raw === "") return setForm({ ...form, price_pence: "" });
-                const n = Number(raw);
-                if (Number.isNaN(n)) return;
-                setForm({ ...form, price_pence: String(Math.round(n * 100)) });
-              }}
+              value={form.price_pounds}
+              onChange={(e) => setForm({ ...form, price_pounds: e.target.value })}
             />
           </div>
           <div className="text-[10px] uppercase tracking-[0.14em] text-ink-muted">Used when no variant is selected.</div>
@@ -231,18 +227,8 @@ export function ProductForm({ product, categories }: { product?: Product; catego
               inputMode="decimal"
               className="pl-7"
               placeholder="—"
-              value={
-                form.sale_price_pence === ""
-                  ? ""
-                  : (Number(form.sale_price_pence) / 100).toFixed(2)
-              }
-              onChange={(e) => {
-                const raw = e.target.value;
-                if (raw === "") return setForm({ ...form, sale_price_pence: "" });
-                const n = Number(raw);
-                if (Number.isNaN(n)) return;
-                setForm({ ...form, sale_price_pence: String(Math.round(n * 100)) });
-              }}
+              value={form.sale_price_pounds}
+              onChange={(e) => setForm({ ...form, sale_price_pounds: e.target.value })}
             />
           </div>
           <div className="text-[10px] uppercase tracking-[0.14em] text-ink-muted">
